@@ -1,0 +1,57 @@
+body{
+
+	background-image: url("stardust.png");
+}
+
+p, form{
+	color: white;
+}
+
+.title{
+	font-size: 24px;
+	color: white;
+}
+
+.input{
+	color: black;
+	
+}
+
+.form-group{
+	width: 20%;
+
+}
+
+tr, td{
+	color: white;
+}
+
+#labels{
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.contactlisting{
+	text-align: center;
+}
+
+.logout{
+	font-size:20px;
+	text-align: right;
+	margin-right: 100px;
+	margin-top: 20px;
+}
+
+#emptycontact{
+	font-size:20px;
+	color: white;
+}
+
+.inputlabel{
+	float: left;
+	margin-left: 2%;
+}
+
+
+

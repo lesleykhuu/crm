@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<br><br><center><strong><p class= "title">Login</p></strong></center>
+	</head>
+
+	<body>
+	<center>
+		<br><br>
+		<p>Username or password was incorrect. Please try again.</p>
+			<form action="logincheck.php" method="post">
+			Username: <input type="text" name="user" class="input"> <br><br>
+			Password: <input type="password" name="password" class="input"><br><br>
+			<input type = "submit" value="Login" class="btn btn-success">
+		</form>
+		<br>
+		<form action="index.php">
+			<button type="submit" class="btn btn-success">Home</button>
+		</form>
+
+	</center>
+
+	</body>
+
+
+
+</html>

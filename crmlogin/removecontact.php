@@ -6,7 +6,12 @@
 		<?php 
 			session_start();
 			$user = $_SESSION['user'];
-	
+			if(!isset($user)){
+				header("Location: index.php");
+			}
+			include 'connection.php';
+			$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
+			$result = $conn->query($sql);
 		?>
 
 	<div class="logout">
@@ -18,27 +23,6 @@
 	<br>
 		<center><br><strong><p class="title">Remove Contact<p></strong></center>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script>
-	function myFunction(){
-		var x = document.forms[0];
-		var checked = [];
-		var i;
-		for (i = 0; i < x.length; i++){
-			
-			if(x.elements[i].checked == true){
-			checked.push(x.elements[i]);
-			}
-	
-		}
-
-
-
-	}	
-	
-
-
-	</script>
 
 	</head>
 
@@ -56,27 +40,25 @@
 					<td> Last Name </td>
 					<td> Email </td>
 				</tr>
-			<?php
-				include 'connection.php';
-				$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
-				$result = $conn->query($sql);
-				?><form action="removecontact2.php" method="get"><?php
-				while($info = $result->fetch_assoc()){
-					echo "<tr>";					
-					?><td><input name="checkbox[]" type="checkbox" value = <?php echo $info['email']; ?>></td><?php
 
-					echo "<td>".$info['firstname']."</td>";
-					echo "<td>".$info['lastname']."</td>";
-					echo "<td>".$info['email']."</td></tr>";
-					
+				<form action="removecontact2.php" method="get">
+			
+			<?php
+				while($info = $result->fetch_assoc()){
+					echo "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['email']."></td>";					
+					echo "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
 
 				}
 				
 			?>
 	
 			</table>
-					<input type="submit" name="delete" value="Delete" class="btn btn-success">
+				<input type="submit" name="delete" value="Delete" class="btn btn-success">
 				
+				</form>
+			<br><br>
+				<form action="login.php">
+				<button type="submit" class="btn btn-success">Home</button><br>
 				</form>
 
 		</div>

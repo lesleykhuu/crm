@@ -7,8 +7,9 @@
 		<?php 
 			session_start();
 			$user = $_SESSION['user'];
-			if(!isset($user))
+			if(!isset($user)){
 				header("Location: index.php");
+			}
 	
 		?>
 
@@ -47,7 +48,7 @@
 <br>
 		<div>
 			<table style="width: 40%" class="table table-bordered">
->
+
 				<tr id="labels">
 					<td> First Name </td>
 					<td> Last Name </td>
@@ -71,11 +72,13 @@
 	
 			</table>
 			<div id="emptycontact">
+
 			<?php
 				if($result->num_rows == 0){
 					echo "Contact list is empty";
 				}
 			?>
+			
 			</div>
 		</div>
 		</center>

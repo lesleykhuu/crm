@@ -25,6 +25,6 @@ include 'connection.php';
 		
 	}
 	else{
-		header("Location: loginerror.php");
+		header("Location: loginerror.html");
 	}
 

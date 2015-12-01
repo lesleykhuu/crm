@@ -4,7 +4,7 @@ include 'connection.php';
 	$password = $_POST['password'];
 	$enpass = hash('tiger192,3', $password);
 	echo $user." ".$enpass;
-	$sql = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
+	$sql = $conn->prepare("SELECT `username`, `password` FROM `users` WHERE `username` = ?");
 	$sql->bind_param('s', $user);
 	$sql->execute();
 	$result = $sql->get_result();

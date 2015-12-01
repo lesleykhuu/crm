@@ -7,10 +7,10 @@
 	}
 
 	include 'connection.php';
-	$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
+	$sql = "SELECT `firstname`, `lastname`, `email` FROM `contactlist` WHERE `user`='$user'";
 	$result = $conn->query($sql);
 	$contactlist = "";
-	$empty ="";
+	$empty = "";
 	while($info = $result->fetch_assoc()){
 		$contactlist .=  '<tr class="contactlisting">';
 		$contactlist .=  "<td>".$info['firstname']."</td>";

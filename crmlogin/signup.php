@@ -5,7 +5,7 @@
 	$create = 1;
 	$message = "";
 	$userr = mysql_escape_string($user);
-	$sql = "SELECT username FROM users WHERE username='$userr'";
+	$sql = "SELECT `username` FROM `users` WHERE `username`='$userr'";
 	$result = $conn->query($sql);
 
 	if(empty($_POST['user'])){
@@ -33,7 +33,7 @@
 
 	if($create == 1){
 		session_start();					
-		$sql = "INSERT INTO users (username, password) VALUES ('$user', '$enpass')";
+		$sql = "INSERT INTO `users` (`username`, `password`) VALUES ('$user', '$enpass')";
 		$_SESSION['user'] = $user;
 		if($conn->query($sql) === TRUE){
 			header("Location: login.php");

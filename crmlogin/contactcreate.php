@@ -11,20 +11,24 @@
 		$email = $_POST['email'];
 
 		if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
-			$sql = "SELECT email FROM contactlist WHERE email='$email'";
+			$sql = "SELECT `email` FROM `contactlist` WHERE `email`='$email'";
 			$result = $conn->query($sql);
-			if($result->num_rows > 0)
+			if($result->num_rows > 0){
 				$message = "This email is already used by an existing contact<br><br>";
+			}
 			else{
-				$sql = "INSERT INTO contactlist(user, firstname, lastname, email) VALUES ('$user','$firstname','$lastname','$email')"; 
-				if($conn->query($sql) === TRUE)
+				$sql = "INSERT INTO `contactlist`(`user`, `firstname`, `lastname`, `email`) VALUES ('$user','$firstname','$lastname','$email')"; 
+				if($conn->query($sql) === TRUE){
 					$message = "Contact Added!<br><br>";
-				else
+				}
+				else{
 					$message = $conn->error;
+				}
 			}
 		}
-		else
+		else{
 			$message = "Please fill out the entire form!<br><br>";
+		}
 ?>
 
 <!DOCTYPE HTML>

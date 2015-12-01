@@ -5,7 +5,7 @@
 		header("Location: index.html");
 	}
 	include 'connection.php';
-	$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
+	$sql = "SELECT `firstname`, `lastname`, `email` FROM `contactlist` WHERE `user`='$user'";
 	$result = $conn->query($sql);
 	$contactlist = "";
 	while($info = $result->fetch_assoc()){

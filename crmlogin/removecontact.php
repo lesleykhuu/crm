@@ -1,13 +1,26 @@
+<?php 
+	session_start();
+	$user = $_SESSION['user'];
+	if(!isset($user)){
+		header("Location: index.html");
+	}
+	include 'connection.php';
+	$sql = "SELECT `firstname`, `lastname`, `email` FROM `contactlist` WHERE `user`='$user'";
+	$result = $conn->query($sql);
+	$contactlist = "";
+	while($info = $result->fetch_assoc()){
+		$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['email']."></td>";					
+		$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
+
+	}
+		
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
-		<?php 
-			session_start();
-			$user = $_SESSION['user'];
-	
-		?>
 
 	<div class="logout">
 		<form action="logout.php">
@@ -18,27 +31,6 @@
 	<br>
 		<center><br><strong><p class="title">Remove Contact<p></strong></center>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script>
-	function myFunction(){
-		var x = document.forms[0];
-		var checked = [];
-		var i;
-		for (i = 0; i < x.length; i++){
-			
-			if(x.elements[i].checked == true){
-			checked.push(x.elements[i]);
-			}
-	
-		}
-
-
-
-	}	
-	
-
-
-	</script>
 
 	</head>
 
@@ -56,27 +48,21 @@
 					<td> Last Name </td>
 					<td> Email </td>
 				</tr>
+
+				<form action="removecontact2.php" method="get">
+			
 			<?php
-				include 'connection.php';
-				$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
-				$result = $conn->query($sql);
-				?><form action="removecontact2.php" method="get"><?php
-				while($info = $result->fetch_assoc()){
-					echo "<tr>";					
-					?><td><input name="checkbox[]" type="checkbox" value = <?php echo $info['email']; ?>></td><?php
-
-					echo "<td>".$info['firstname']."</td>";
-					echo "<td>".$info['lastname']."</td>";
-					echo "<td>".$info['email']."</td></tr>";
-					
-
-				}
+				echo $contactlist;
 				
 			?>
 	
 			</table>
-					<input type="submit" name="delete" value="Delete" class="btn btn-success">
+				<input type="submit" name="delete" value="Delete" class="btn btn-success">
 				
+				</form>
+			<br><br>
+				<form action="login.php">
+				<button type="submit" class="btn btn-success">Home</button><br>
 				</form>
 
 		</div>

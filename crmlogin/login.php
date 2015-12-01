@@ -1,16 +1,33 @@
+<?php 
+	session_start();
+	$user = $_SESSION['user'];
+	$welcome = "Welcome ".$user;
+	if(!isset($user)){
+		header("Location: index.html");
+	}
+
+	include 'connection.php';
+	$sql = "SELECT `firstname`, `lastname`, `email` FROM `contactlist` WHERE `user`='$user'";
+	$result = $conn->query($sql);
+	$contactlist = "";
+	$empty = "";
+	while($info = $result->fetch_assoc()){
+		$contactlist .=  '<tr class="contactlisting">';
+		$contactlist .=  "<td>".$info['firstname']."</td>";
+		$contactlist .=  "<td>".$info['lastname']."</td>";
+		$contactlist .=  "<td>".$info['email']."</td></tr>";	
+	}
+	if($result->num_rows == 0){
+			$empty = "Contact list is empty";
+		}
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
-		<?php 
-			session_start();
-			$user = $_SESSION['user'];
-			if(!isset($user))
-				header("Location: index.php");
-	
-		?>
 
 	<div class="logout">
 		<form action="logout.php">
@@ -19,7 +36,7 @@
 		
 	</div>
 	
-		<center><br><strong><p class="title"><?php echo "Welcome ".$user?></p></strong></center></head>
+		<center><br><strong><p class="title"><?php echo $welcome ?></p></strong></center></head>
 
 	<body>
 		<br>
@@ -47,35 +64,25 @@
 <br>
 		<div>
 			<table style="width: 40%" class="table table-bordered">
->
+
 				<tr id="labels">
 					<td> First Name </td>
 					<td> Last Name </td>
 					<td> Email </td>
 				</tr>
+			
 			<?php
-				include 'connection.php';
-				$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
-				$result = $conn->query($sql);
-				while($info = $result->fetch_assoc()){
-					echo '<tr class="contactlisting">';
-					echo "<td>".$info['firstname']."</td>";
-					echo "<td>".$info['lastname']."</td>";
-					echo "<td>".$info['email']."</td></tr>";
-					
-
-				}
-				
+				echo $contactlist;				
 			?>
 
 	
 			</table>
 			<div id="emptycontact">
+
 			<?php
-				if($result->num_rows == 0){
-					echo "Contact list is empty";
-				}
+				echo $empty;
 			?>
+			
 			</div>
 		</div>
 		</center>

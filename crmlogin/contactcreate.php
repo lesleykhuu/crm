@@ -1,12 +1,41 @@
+<?php 
+	session_start();
+	$user = $_SESSION['user'];
+	if(!isset($user)){
+		header("Location: index.html");
+	}
+	include 'connection.php';
+		$message = "";
+		$firstname = $_POST['firstname'];
+		$lastname = $_POST['lastname'];
+		$email = $_POST['email'];
+
+		if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
+			$sql = "SELECT `email` FROM `contactlist` WHERE `email`='$email'";
+			$result = $conn->query($sql);
+			if($result->num_rows > 0){
+				$message = "This email is already used by an existing contact<br><br>";
+			}
+			else{
+				$sql = "INSERT INTO `contactlist`(`user`, `firstname`, `lastname`, `email`) VALUES ('$user','$firstname','$lastname','$email')"; 
+				if($conn->query($sql) === TRUE){
+					$message = "Contact Added!<br><br>";
+				}
+				else{
+					$message = $conn->error;
+				}
+			}
+		}
+		else{
+			$message = "Please fill out the entire form!<br><br>";
+		}
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
-		<?php 
-			session_start();
-			$user = $_SESSION['user'];
-		?>
 
 	<div class="logout">
 		<form action="logout.php">
@@ -31,33 +60,12 @@
 				<input type="text" placeholder="Last Name" name='lastname' class="form-control input"><br><br>
 				
 				<label class="inputlabel"> Email</label>
-				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>
-
-			
-				
+				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>			
 				
 			<?php
-				include 'connection.php';
-				$firstname = $_POST['firstname'];
-				$lastname = $_POST['lastname'];
-				$email = $_POST['email'];
-
-				if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
-					$sql = "SELECT email FROM contactlist WHERE email='$email'";
-					$result = $conn->query($sql);
-					if($result->num_rows > 0)
-						echo "This email is already used by an existing contact<br><br>";
-					else{
-						$sql = "INSERT INTO contactlist(user, firstname, lastname, email) VALUES ('$user','$firstname','$lastname','$email')"; 
-						if($conn->query($sql) === TRUE)
-							echo "Contact Added!<br><br>";
-						else
-							echo $conn->error;
-					}
-				}
-				else
-					echo "Please fill out the entire form!<br><br>";
+				echo $message;
 			?>
+			
 				<input type="submit" value="Create Contact" class="btn btn-success">
 			</form>
 

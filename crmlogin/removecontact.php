@@ -12,6 +12,13 @@
 			include 'connection.php';
 			$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
 			$result = $conn->query($sql);
+			$contactlist = "";
+			while($info = $result->fetch_assoc()){
+				$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['email']."></td>";					
+				$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
+
+			}
+				
 		?>
 
 	<div class="logout">
@@ -44,11 +51,7 @@
 				<form action="removecontact2.php" method="get">
 			
 			<?php
-				while($info = $result->fetch_assoc()){
-					echo "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['email']."></td>";					
-					echo "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
-
-				}
+				echo $contactlist;
 				
 			?>
 	

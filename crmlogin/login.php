@@ -10,7 +10,16 @@
 			if(!isset($user)){
 				header("Location: index.php");
 			}
-	
+			include 'connection.php';
+			$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
+			$result = $conn->query($sql);
+			$contactlist = "";
+			while($info = $result->fetch_assoc()){
+				$contactlist .=  '<tr class="contactlisting">';
+				$contactlist .=  "<td>".$info['firstname']."</td>";
+				$contactlist .=  "<td>".$info['lastname']."</td>";
+				$contactlist .=  "<td>".$info['email']."</td></tr>";	
+			}
 		?>
 
 	<div class="logout">
@@ -55,17 +64,9 @@
 					<td> Email </td>
 				</tr>
 			<?php
-				include 'connection.php';
-				$sql = "SELECT firstname, lastname, email FROM contactlist WHERE user='$user'";
-				$result = $conn->query($sql);
-				while($info = $result->fetch_assoc()){
-					echo '<tr class="contactlisting">';
-					echo "<td>".$info['firstname']."</td>";
-					echo "<td>".$info['lastname']."</td>";
-					echo "<td>".$info['email']."</td></tr>";
-					
+				
 
-				}
+				echo $contactlist;
 				
 			?>
 

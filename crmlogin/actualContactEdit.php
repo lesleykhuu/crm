@@ -15,9 +15,10 @@ Takes in values from contactedit2.php and changes them in the database.
 	$check = 0;
 
 	if(!empty($_POST['firstname']) || !empty($_POST['lastname']) || !empty($_POST['email'])){
-		$obj = new Contact();
+		// $obj = new Contact();
 		// $obj::GetByEmail($actualEmail);
-		$obj::GetById($contactId);
+		$obj = Contact::GetById($contactId);
+		echo $contactId;
 		if(!empty($_POST['firstname'])){
 			$obj->setValue('firstname',$firstname);
 		}

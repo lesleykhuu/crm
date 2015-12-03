@@ -7,12 +7,11 @@
 		private $user;
 		private $currentEmail;
 
-		public static function Get($email){
+		public static function GetByEmail($email){
 			include 'connection.php';
 			session_start();
 			global $user;
 			$user = $_SESSION['user'];
-			$welcome = "Welcome ".$user;
 			if(!isset($user)){
 				header("Location: index.html");
 			}
@@ -20,6 +19,31 @@
 			global $userInfo;
 			global $currentEmail;
 			$sql = "SELECT * FROM `contactlist` WHERE `email`='$email' AND `user`='$user'";
+			$result = $conn->query($sql);
+			$info = $result->fetch_assoc();
+
+			$userInfo['firstname'] = $info['firstname'];
+			$userInfo['lastname'] = $info['lastname'];
+			$userInfo['email'] = $info['email'];
+			$currentEmail = $info['email'];
+			// echo $userInfo['email'];
+			// echo $currentEmail;
+			//echo $userInfo['firstname'];
+			
+		}
+
+		public static function GetById($id){
+			include 'connection.php';
+			session_start();
+			global $user;
+			$user = $_SESSION['user'];
+			if(!isset($user)){
+				header("Location: index.html");
+			}
+
+			global $userInfo;
+			global $currentEmail;
+			$sql = "SELECT * FROM `contactlist` WHERE `contactId`='$id' AND `user`='$user'";
 			$result = $conn->query($sql);
 			$info = $result->fetch_assoc();
 
@@ -42,7 +66,7 @@
 
 		}
 
-		public function getValue(){
+		public function getValue($value){
 			global $userInfo;
 			return $userInfo['firstname'];
 		}

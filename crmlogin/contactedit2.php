@@ -15,7 +15,7 @@ if(isset($_GET['radio'])){
 	// echo $info['firstname'];
 	// echo $info['lastname'];
 	// echo $info['email'];
-	$email = "Editing user with email, ".$info['email'];
+	$email = "Editing user with email, ".$info['email']." id = ".$info['contactId'];
 
 }
 else{
@@ -57,8 +57,9 @@ else{
 				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>			
 				
 
-				<input type="hidden" placeholder="Email" name='actualEmail' value = <?php echo $radio[0]; ?> class="form-control input"><br><br>			
-				
+				<input type="hidden" name='actualEmail' value = <?php echo $radio[0]; ?> ><br><br>			
+				<input type="hidden" name='contactId' value = <?php echo $info['contactId']; ?> ><br><br>			
+
 			
 				<input type="submit" value="Edit Contact" class="btn btn-success">
 			</form>

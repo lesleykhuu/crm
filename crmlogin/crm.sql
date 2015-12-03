@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2015 at 12:31 AM
+-- Generation Time: Dec 03, 2015 at 06:56 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contactlist` (
+  `contactId` int(11) NOT NULL,
   `user` varchar(20) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
@@ -37,13 +38,10 @@ CREATE TABLE `contactlist` (
 -- Dumping data for table `contactlist`
 --
 
-INSERT INTO `contactlist` (`user`, `firstname`, `lastname`, `email`) VALUES
-('aa', 'aa', 'aa', 'aa'),
-('lk', 'ted', 'wang', 'asdfwer'),
-('lk', 'bob', 'lee', 'boblee@asdfasdf'),
-('lk', 'lesley', 'khuu', 'lesley@gmail.com'),
-('lk', 'asdf', 'qwerqew', 'qwerqwe'),
-('lk', 'hello', 'sdf', 'sw');
+INSERT INTO `contactlist` (`contactId`, `user`, `firstname`, `lastname`, `email`) VALUES
+(1, 'lk', 'lesley', 'khuu', 'lesleykhuu'),
+(2, 'lk', 'bob', 'wang', 'dang'),
+(3, 'lk', 'yolo', 'swag', 'boi');
 
 -- --------------------------------------------------------
 
@@ -61,15 +59,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`) VALUES
+('105 or 1=1', 'fd7d2e54008c0cc0bdf37de6fe10bd1b5e46317f7c15deed'),
 ('aa', 'af4959dd87f673dc0f615a5434ca5ee1ba2752f07baeb16d'),
 ('asdas', '2e842454356af3fc10cf4fa66a55757eb3007c8defbfa39a'),
+('asdasdf', 'd916cdc4c1e7cb899ab8f64500134057c6da7e6ae0d02c62'),
+('asde', '38b58460c8ecacb628c66af32ccf07b9979398525ec5e1b1'),
 ('asdf', 'adsf'),
 ('asdfasdf', 'asdfasdf'),
+('asdfasdfas', 'd916cdc4c1e7cb899ab8f64500134057c6da7e6ae0d02c62'),
+('asdfasdfasd', 'c7f6092beca6e8fa556163025cc4f1db95d321e54b19762e'),
 ('asdfasdfasdfasdf', '223c9a0e319c7401441a'),
+('asdfasdfasf', 'a6ce1bd6c6754725b7e9e6d6dbeeb34f97800933713ddfc6'),
+('aswerqer', '26ddd44f2fef97c1edcfdce33d632344899d941db62aeaa0'),
 ('guccci', '25fc970a2ea233c9bb34'),
 ('gucci', '25fc970a2ea233c9bb34'),
 ('hihiasi', 'eeba5b09cf0979ed3b54'),
 ('hihiasiwqerwqe', '25fc970a2ea233c9bb34'),
+('l', '4dbf51c7f3089a3d15ea3650084cb09a8bc1798b43beea45'),
 ('lesl12', '25fc970a2ea233c9bb34'),
 ('lesley', 'khuu'),
 ('lesley1', '916ea2883d1b55599a21'),
@@ -96,7 +102,8 @@ INSERT INTO `users` (`username`, `password`) VALUES
 -- Indexes for table `contactlist`
 --
 ALTER TABLE `contactlist`
-  ADD PRIMARY KEY (`user`,`email`);
+  ADD PRIMARY KEY (`contactId`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `users`
@@ -104,6 +111,15 @@ ALTER TABLE `contactlist`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `contactlist`
+--
+ALTER TABLE `contactlist`
+  MODIFY `contactId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

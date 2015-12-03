@@ -1,4 +1,8 @@
 <?php
+/*
+Allows the user to input the fields they want to edit
+
+*/
 include 'connection.php';
 
 session_start();

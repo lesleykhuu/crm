@@ -1,5 +1,8 @@
 <?php
+/*
+Takes in values from contactedit2.php and changes them in the database.
 
+*/
 	include 'Contact.php';
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
@@ -21,6 +24,7 @@
 		if(!empty($_POST['lastname'])){
 			$obj->setValue('lastname',$lastname);
 		}
+
 
 		if(!empty($_POST['email'])){
 			// include 'connection.php';

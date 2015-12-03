@@ -1,13 +1,19 @@
 <?php
 
+/**
+Methods used to edit contacts. Used in actualContactEdit.php
+*/
 	class Contact{
 		
 
 		private $userInfo = array('firstname' => " ", 'lastname' => " ", 'email' => " ");
-		private $user;
+		private $user; 
 		private $currentEmail;
 
-		public static function GetByEmail($email){
+/**
+Instantiates the object by email
+*/
+		public static function GetByEmail($email){ 
 			include 'connection.php';
 			session_start();
 			global $user;
@@ -32,6 +38,9 @@
 			
 		}
 
+/**
+Instantiates the object by contactId
+*/
 		public static function GetById($id){
 			include 'connection.php';
 			session_start();
@@ -56,7 +65,11 @@
 			//echo $userInfo['firstname'];
 			
 		}
-
+/**
+Sets the value of a column you want to edit.
+$set can be firstname, lastname, or email
+$value is the new value you want to store
+*/
 		public function setValue($set, $value){
 			include 'connection.php';
 
@@ -65,12 +78,34 @@
 			
 
 		}
-
+/**
+Gets the column from the database and returns it.
+*/
 		public function getValue($value){
 			global $userInfo;
-			return $userInfo['firstname'];
+			if($value == 'firstname'){
+				return $userInfo['firstname'];
+			}
+			else if($value == 'lastname'){
+				return $userInfo['lastname'];
+			}
+			else if($value == 'email'){
+				return $userInfo['firstname'];
+			}
+			else if($value == 'email'){
+				return $userInfo['email'];
+			}
+			else if($value == 'contactId'){
+				return $userInfo['contactId'];
+			}
+			else{
+				return "Invalid parameter";
+			}
 		}
 
+/**
+Saves the values, that you set in setValue, into the database
+*/
 		public function Save(){
 			include 'connection.php';
 

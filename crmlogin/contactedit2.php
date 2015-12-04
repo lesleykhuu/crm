@@ -10,15 +10,13 @@ $user = $_SESSION['user'];
 
 if(isset($_GET['radio'])){
 	$radio = $_GET['radio'];
-	echo $radio[0];
+	//uncomment to check index
+	// echo $radio[0];
 
 
-	$sql = "SELECT * FROM `contactlist` WHERE `email`='$radio[0]' AND `user`='$user'";
+	$sql = "SELECT * FROM `contactlist` WHERE `contactId`='$radio[0]' AND `user`='$user'";
 	$result = $conn->query($sql);
 	$info = $result->fetch_assoc();
-	// echo $info['firstname'];
-	// echo $info['lastname'];
-	// echo $info['email'];
 	$email = "Editing user with email, ".$info['email']." id = ".$info['contactId'];
 
 }

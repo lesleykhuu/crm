@@ -5,11 +5,11 @@
 		header("Location: index.html");
 	}
 	include 'connection.php';
-	$sql = "SELECT `firstname`, `lastname`, `email` FROM `contactlist` WHERE `user`='$user'";
+	$sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
 	$result = $conn->query($sql);
 	$contactlist = "";
 	while($info = $result->fetch_assoc()){
-		$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['email']."></td>";					
+		$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";					
 		$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
 
 	}

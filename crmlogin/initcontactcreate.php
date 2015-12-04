@@ -15,7 +15,7 @@
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">LOGOUT</button><br>
+			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
 		</form>
 		
 	</div>

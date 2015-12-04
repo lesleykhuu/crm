@@ -9,7 +9,7 @@
 	$result = $conn->query($sql);
 	$contactlist = "";
 	while($info = $result->fetch_assoc()){
-		$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";					
+		$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";					
 		$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
 
 	}
@@ -29,7 +29,7 @@
 		
 	</div>
 	<br>
-		<center><br><strong><p class="title">Remove Contact<p></strong></center>
+		<center><br><strong><p class="title">Edit Contact<p></strong></center>
 	
 
 	</head>
@@ -49,7 +49,7 @@
 					<td> Email </td>
 				</tr>
 
-				<form action="removecontact2.php" method="get">
+				<form action="contactedit2.php" method="get">
 			
 			<?php
 				echo $contactlist;
@@ -57,7 +57,7 @@
 			?>
 	
 			</table>
-				<input type="submit" name="delete" value="Delete" class="btn btn-success">
+				<input type="submit" name="edit" value="Edit" class="btn btn-success">
 				
 				</form>
 			<br><br>

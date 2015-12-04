@@ -1,30 +1,42 @@
 <?php 
+	include 'connection.php';
+	include 'Contact.php';
 	session_start();
 	$user = $_SESSION['user'];
 	if(!isset($user)){
 		header("Location: index.html");
 	}
-	include 'connection.php';
 		$message = "";
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
 
 		if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
+			
+			/* if you want to not include duplicate contacts with same email.
+
 			$sql = "SELECT `email` FROM `contactlist` WHERE `email`='$email'";
 			$result = $conn->query($sql);
 			if($result->num_rows > 0){
 				$message = "This email is already used by an existing contact<br><br>";
 			}
 			else{
-				$sql = "INSERT INTO `contactlist`(`user`, `firstname`, `lastname`, `email`) VALUES ('$user','$firstname','$lastname','$email')"; 
-				if($conn->query($sql) === TRUE){
-					$message = "Contact Added!<br><br>";
-				}
-				else{
-					$message = $conn->error;
-				}
-			}
+				$obj = Contact::GetById(NULL);
+				$obj->setValue('firstname',$firstname);
+				$obj->setValue('lastname',$lastname);
+				$obj->setValue('email',$email);
+				$obj->setValue('user',$user);
+				$obj->Save();
+				$message = "Contact Added!<br><br>";
+			} 
+			*/
+				$obj = Contact::GetById(NULL);
+				$obj->setValue('firstname',$firstname);
+				$obj->setValue('lastname',$lastname);
+				$obj->setValue('email',$email);
+				$obj->setValue('user',$user);
+				$obj->Save();
+				$message = "Contact Added!<br><br>";
 		}
 		else{
 			$message = "Please fill out the entire form!<br><br>";
@@ -49,7 +61,7 @@
 		<br>
 		<center>
 		<div>
-			<p class="title"> <strong>CREATE CONTACT</strong></p><br>
+			<p class="title"> <strong>Create Contact</strong></p><br>
 		</div>
 		<div class="form-group">
 			<form action="contactcreate.php" method="post">

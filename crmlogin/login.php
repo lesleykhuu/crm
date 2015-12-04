@@ -45,21 +45,26 @@
 		<div>
 			<p class="title"> Contact List</p>
 		</div>
+
 		<div class="row">
-		<div class="col-md-6" align="right">
-			
+		<div class="col-md-5" align="right">
 			<form action="initcontactcreate.php">
 				<input type="submit" value="Create Contact" class="btn btn-success">
 			</form>
 		</div>
-		<div class="col-md-6" align="left">
+		<div class="col-md-2">
+			
+			<form action="contactedit.php">
+				<input type="submit" value="Edit Contact" class="btn btn-success">
+			</form>
+		</div>
+		<div class="col-md-5" align="left">
 			<form action="removecontact.php">
 				<input type="submit" value="Remove Contact" class="btn btn-success">
 			</form>
 		
 		</div>
 		</div>
-
 <br>
 <br>
 		<div>

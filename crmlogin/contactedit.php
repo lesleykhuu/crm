@@ -2,18 +2,54 @@
 	session_start();
 	$user = $_SESSION['user'];
 	if(!isset($user)){
-		header("Location: index.html");
+		header("Location: index.php");
 	}
+
+	require 'Contact.php';
 	include 'connection.php';
+
+	$obj = new Contact();
+	$fields = $obj->getColFields($user);
+
 	$sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
 	$result = $conn->query($sql);
-	$contactlist = "";
-	while($info = $result->fetch_assoc()){
-		$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";					
-		$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
+	$contactlist = "<thead><tr id='labels'><th></th>";
+	$fieldquery ="";
+	for($i = 0; $i < count($fields[1]); $i++){
+		$info = $result->fetch_assoc();
+		$fieldquery .= $fields[0][$i].",";
+
+		$contactlist .= "<th>".$fields[1][$i]."</th>";
+
 
 	}
-		
+
+	$queryStr = substr($fieldquery,0, -1);
+	$contactlist .= "</tr></thead>";
+	
+
+	$contactlist .=  '<tr class="contactlisting">';
+	// $sql = "SELECT * FROM `contactlist` WHERE user = $user";
+	if($result = $conn->query($sql)){
+		while($info = $result->fetch_assoc()){
+			$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";
+			for($j = 0; $j < count($fields[0]); $j++){
+				$contactlist .= "<td>".$info[$fields[0][$j]]."</td>";
+			}
+			$contactlist .= "</tr>";
+		}
+	}
+	$check = 0;
+	$empty = "";
+	if($result->num_rows == 0){
+		$check =1;
+			$empty = "Contact list is empty";
+			$contactlist = "";
+		}
+
+	
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -42,12 +78,7 @@
 
 		<div>
 			<table style="width: 40%" class="table table-bordered">
-				<tr>
-					<td></td>
-					<td> First Name </td>
-					<td> Last Name </td>
-					<td> Email </td>
-				</tr>
+
 
 				<form action="contactedit2.php" method="get">
 			
@@ -57,11 +88,18 @@
 			?>
 	
 			</table>
+			<div id="emptycontact">
+
+			<?php
+				echo $empty;
+			?>
+			
+			</div>
 				<input type="submit" name="edit" value="Edit" class="btn btn-success">
 				
 				</form>
 			<br><br>
-				<form action="login.php">
+				<form action="welcome.php">
 				<button type="submit" class="btn btn-success">Home</button><br>
 				</form>
 

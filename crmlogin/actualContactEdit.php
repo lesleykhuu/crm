@@ -4,30 +4,40 @@ Takes in values from contactedit2.php and changes them in the database.
 
 */
 require 'Contact.php';
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$email = $_POST['email'];
+// $fieldVals = $_POST['fields'];
 $contactId = $_POST['contactId'];
+$user = $_POST['user'];
 
-$check = 0;
+		$message = "";
+		$fieldVals = $_POST['fields'];
 
-if(!empty($_POST['firstname']) || !empty($_POST['lastname']) || !empty($_POST['email'])){
-	// $obj = new Contact();
-	// $obj::GetByEmail($actualEmail);
-	$obj = Contact::GetById($contactId);
-	// echo $contactId;
-	if(!empty($_POST['firstname'])){
-		$obj->setValue('firstname',$firstname);
-	}
-	if(!empty($_POST['lastname'])){
-		$obj->setValue('lastname',$lastname);
-	}
-	if(!empty($_POST['email'])){
-		$obj->setValue('email',$email);
-	}
+		$obj = new Contact();
+		$fields = $obj->getColFields($user);
 
-	$obj->Save();
-}
+		$check =1;
+		for($i=0; $i < count($fieldVals); $i++){
+			if("" != $fieldVals[$i]){
+				$check = 0;
+			}
+		}
+		if($check == 0){
+				$obj = Contact::GetById(NULL);
+				$obj->setColumns('user');
+				$obj->setValue('user',$user);
+				$obj->setColumns('contactId');
+				$obj->setValue('contactId',$contactId);
+
+				for($i = 0; $i < count($fields[0]); $i++){
+					$obj->setColumns($fields[0][$i]);
+					$obj->setValue($fields[0][$i], $fieldVals[$i]);
+				}
+				$obj->Save();
+				// $message = "Contact Added!<br><br>";
+		}
+		else{
+			$message = "Form was empty!<br><br>";
+			header("Location: contactedit.php"	);
+		}
 
 	
 if($check == 0){

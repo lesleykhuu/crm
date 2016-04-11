@@ -1,39 +1,99 @@
 body{
 
-	background-image: url("stardust.png");
+	/*background-image: url("stardust.png");*/
+	background-color: #525565;
 }
-
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #74828F;
+ }
 p, form{
 	color: white;
+	font-size: 17px;
 }
+
+.hidden1{
+	display: none;
+}
+
+.visible1{
+	display: block;
+}
+
+.rfont{
+	/*color: red;*/
+	/*font-weight: bold;*/
+	font-size: 20px;
+}
+
+.box{
+	background-color: transparent;
+	border-style: solid;
+	border-color: white;
+	width: 20%;
+}
+.rbox{
+	/*background-color: transparent;*/
+	/*border-style: solid;*/
+	/*border-color: red;*/
+	width: 20%;
+}
+
 
 .title{
 	font-size: 24px;
 	color: white;
+	font-family: 'Roboto', sans-serif;
 }
 
+/*label,input{
+	display: block;
+}*/
+
+.button{
+	width: 100%;
+}
+
+
 .input{
+	width: 70%;
 	color: black;
 	
 }
 
+.homeforms{
+	width: 80%;
+	border-style: solid;
+	border-color: white;
+}
+
 .form-group{
-	width: 20%;
+	width: 50%;
+	border-style: solid;
+	padding: 10px;
 
 }
 
+.fleft{
+	/*float: left;*/
+	width: 100%;
+	height: 20px;
+	padding: 5px;
+	border-radius: 3px;
+	border-color: transparent; 
+}
 tr, td{
 	color: white;
 }
 
 #labels{
-	font-size: 20px;
+	/*font-size: 20px;*/
 	font-weight: bold;
-	text-align: center;
+	/*text-align: center;*/
 }
 
 .contactlisting{
-	text-align: center;
+	/*text-align: center;*/
 }
 
 .logout{
@@ -50,8 +110,53 @@ tr, td{
 
 .inputlabel{
 	float: left;
-	margin-left: 2%;
+	margin-left: 1%;
+	/*font-color: red;*/
+	color: white;
+	font-size: 15px;
 }
 
 
 
+
+
+/*.menus li {
+    background-color: #ffffff;
+    border-style: solid;
+    border-radius: 4px 4px 0 0;
+}*/
+
+
+.menuBtn{
+	float: left;
+	margin-right:1px;
+	margin-bottom: 5px;
+	/*border-style: solid;*/
+	width: 30%;
+	/*border-radius: 4px 4px 0px 0px;*/
+}
+
+.buttons{
+	color: white;
+	/*background-color: #26a69a;*/
+	background-color:#21b6a8;
+	border-radius: 5px 5px 0px 0px;
+	border-color: transparent;
+	padding: 5px;
+	width: 100%;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+
+
+.changeColor{
+	background-color: #177f75;
+}
+
+.buttons:hover{
+	background-color: #177f75;
+}
+
+.clear{
+	clear:both;
+}

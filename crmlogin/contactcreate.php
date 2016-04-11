@@ -7,40 +7,39 @@
 		header("Location: index.html");
 	}
 		$message = "";
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
-		$email = $_POST['email'];
+		$fieldVals = $_POST['fields'];
+		$obj = new Contact();
+		$fields = $obj->getColFields($user);
+		$check =1;
 
-		if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
-			
-			/* if you want to not include duplicate contacts with same email.
-
-			$sql = "SELECT `email` FROM `contactlist` WHERE `email`='$email'";
-			$result = $conn->query($sql);
-			if($result->num_rows > 0){
-				$message = "This email is already used by an existing contact<br><br>";
+		for($i=0; $i < count($fieldVals); $i++){
+			if($fieldVals[$i] != ""){
+				$check = 0;
 			}
-			else{
-				$obj = Contact::GetById(NULL);
-				$obj->setValue('firstname',$firstname);
-				$obj->setValue('lastname',$lastname);
-				$obj->setValue('email',$email);
-				$obj->setValue('user',$user);
-				$obj->Save();
-				$message = "Contact Added!<br><br>";
-			} 
-			*/
-				$obj = Contact::GetById(NULL);
-				$obj->setValue('firstname',$firstname);
-				$obj->setValue('lastname',$lastname);
-				$obj->setValue('email',$email);
-				$obj->setValue('user',$user);
-				$obj->Save();
-				$message = "Contact Added!<br><br>";
+		}
+		if($check == 0){
+			$obj = Contact::GetById(NULL);
+			$obj->setColumns('user');
+			$obj->setValue('user',$user);
+			for($i = 0; $i < count($fields[0]); $i++){
+				$obj->setColumns($fields[0][$i]);
+				$obj->setValue($fields[0][$i], $fieldVals[$i]);
+			}
+			$obj->Save();
+			$message = "Contact Added!<br><br>";
 		}
 		else{
-			$message = "Please fill out the entire form!<br><br>";
+			$message = "Form was empty!<br><br>";
 		}
+
+		$contactlist = "";
+
+		$fieldquery ="";
+		for($i = 0; $i < count($fields[1]); $i++){
+			$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
+					<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='form-control'><br><br>";
+		}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -63,28 +62,22 @@
 		<div>
 			<p class="title"> <strong>Create Contact</strong></p><br>
 		</div>
-		<div class="form-group">
+		<div class="box">
 			<form action="contactcreate.php" method="post">
-				<label class="inputlabel"> First Name</label>
-				<input type="text" placeholder="First Name" name='firstname' class="form-control input"><br><br>
-				
-				<label class="inputlabel"> Last Name</label>
-				<input type="text" placeholder="Last Name" name='lastname' class="form-control input"><br><br>
-				
-				<label class="inputlabel"> Email</label>
-				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>			
+							
 				
 			<?php
+				echo $contactlist;
 				echo $message;
 			?>
 			
-				<input type="submit" value="Create Contact" class="btn btn-success">
+				<input type="submit" value="Create Contact" class="btn btn-success btn-block">
 			</form>
 
 
 			<br>
-			<form action="login.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+			<form action="welcome.php">
+				<button type="submit" class="btn btn-success btn-block">Home</button><br>
 			</form>
 		</div>
 		</center>

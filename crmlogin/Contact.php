@@ -6,7 +6,7 @@
 class Contact{
 	
 	private $userInfo = array('user' => NULL, 'contactId' => NULL,'firstname' => NULL, 'lastname' => NULL, 'email' => NULL);
-
+	private $userFields = array();
 	/**
 	@brief Instantiates the object by contactId
 	@param $id is the contactId of the contact that is being editted. If 
@@ -37,24 +37,28 @@ class Contact{
 	@param $value is the new value you want to store. Second argument
 	*/
 	public function setValue($set, $value){
-		if($set == 'firstname'){
-			$this->userInfo['firstname'] = mysql_escape_string($value);
-		}
-		else if($set == 'lastname'){
-			$this->userInfo['lastname'] = mysql_escape_string($value);
-		}
-		else if($set == 'email'){
-			$this->userInfo['email'] = mysql_escape_string($value);
-		}
-		else if($set == 'user'){
-			$this->userInfo['user'] = mysql_escape_string($value);
-		}
-		else if($set == 'contactId'){
-			$this->userInfo['contactId'] = mysql_escape_string($value);
-		}
-		else{
-			echo "setValue error";
-		}
+		// echo $set;
+		$this->userFields[$set] = mysql_real_escape_string($value);
+		// print_r($this->userFields);
+		// echo $this->userFields[$set];
+		// if($set == 'firstname'){
+		// 	$this->userInfo['firstname'] = mysql_real_escape_string($value);
+		// }
+		// else if($set == 'lastname'){
+		// 	$this->userInfo['lastname'] = mysql_real_escape_string($value);
+		// }
+		// else if($set == 'email'){
+		// 	$this->userInfo['email'] = mysql_real_escape_string($value);
+		// }
+		// else if($set == 'user'){
+		// 	$this->userInfo['user'] = mysql_real_escape_string($value);
+		// }
+		// else if($set == 'contactId'){
+		// 	$this->userInfo['contactId'] = mysql_real_escape_string($value);
+		// }
+		// else{
+		// 	echo "setValue error";
+		// }
 
 		
 	}
@@ -83,40 +87,105 @@ class Contact{
 		}
 	}
 
+	public function setColumns($fieldName){
+		$this->userFields[$fieldName] = NULL;
+		// echo "USERFIELDS = ";
+		// print_r($this->userFields);
+	}
+
+	public function getColFields($user){
+		require 'connection.php';
+		$sqll = "SELECT `field` FROM `fieldrelation` WHERE `user` = '$user'";
+	  	$resultt = $conn->query($sqll);
+		$i = 0;
+		$colNames = [];
+		$fields = [];
+	    while($row = $resultt->fetch_assoc()) {
+	    	$fieldid = $row['field'];
+	    	$sql = "SELECT `fieldname` FROM `fields` WHERE `fieldid` = '$fieldid'";
+	    	$result = $conn->query($sql);
+	    	$fieldname = $result->fetch_assoc();
+	    	$fields[$i] = $fieldid;
+	    	$colNames[$i] = $fieldname['fieldname'];
+	    	$i++;
+		}
+		return [$fields, $colNames];
+	}
+
+
 	/**
 	@brief Saves the values, that you set in setValue, into the database
 	*/
 	public function Save(){
 		require 'connection.php';
+		// print_r($this->userFields);
+		$queryStrUpdate = "";
+		$queryStrInsert1 = "";
+		$queryStrInsert2 = "";
+		$contactId ="";
+		if(isset($this->userFields['contactId'])){
+			$contactId = $this->userFields['contactId'];
+		}
+		$user = $this->userFields['user'];
+		// echo $user;
+		foreach ($this->userFields as $key => $value) {
+			if($key == 'contactId'){
 
-		$firstname = $this->userInfo['firstname'];
-		$lastname = $this->userInfo['lastname'];
-		$email = $this->userInfo['email'];
-		$contactId = $this->userInfo['contactId'];
-		$user = $this->userInfo['user'];
+			}
+			else{
+				if($value != ""){
+					$queryStrUpdate .= "`".$key."`"." = '$value',";
+		 			$queryStrInsert1 .= ",`".$key."`";
+		 			$queryStrInsert2 .= ",'$value'";	
+				}
+			}
+			
+		}
+		$queryStrUpdate = substr($queryStrUpdate, 0, -1);
+		$queryStrInsert1 = substr($queryStrInsert1, 1);
+		$queryStrInsert2 = substr($queryStrInsert2, 1);
+		// $queryStrInsert1 .= 
+		// $queryStrInsert2 .= 
+		// $firstname = $this->userInfo['firstname'];
+		// $lastname = $this->userInfo['lastname'];
+		// $email = $this->userInfo['email'];
+		
+		// echo $user;
 		// echo $contactId;
 		// echo "<br>";
 		// echo "<br>".$firstname.$lastname.$contactId.$user.$email;
 
+		// echo $contactId;
+		// echo "  ".$user."  ";
+		// echo $user." ".$contactId;
 		if($contactId != NULL){
-			$sql = "UPDATE `contactlist` SET `firstname`= '$firstname', `lastname`= '$lastname', `email`= '$email' WHERE `contactId` = '$contactId'";
+			// $sql = "UPDATE `contactlist` SET `1`= '$firstname', `2`= '$lastname', `3`= '$email' WHERE `contactId` = '$contactId'";
+			$sql = "UPDATE `contactlist` SET ".$queryStrUpdate." WHERE `contactId` = '$contactId'";
+			// echo $sql;
 			if($result = $conn->query($sql)){
 				// echo "updated";
+				// echo $sql;
 				return true;
 			}
 			else{
 				// echo "UPDATEERROR";
+				// echo $conn->error;
 				return false;
 			}
 
 		}
 		else if ($user != NULL){
-			$sql = "INSERT INTO `contactlist`(`user`, `firstname`, `lastname`, `email`) VALUES ('$user','$firstname','$lastname','$email')"; 
+			// echo "yo";
+			$sql = "INSERT INTO `contactlist` (".$queryStrInsert1.") VALUES (".$queryStrInsert2.")";
+			// $sql = "INSERT INTO `contactlist`(`user`, `1`, `2`, `3`) VALUES ('$user','$firstname','$lastname','$email')"; 
+			// echo $sql;
 			if($result = $conn->query($sql)){
-
+				// echo "helloworld";
 				return true;
 			}
 			else{
+				// echo $conn->error;
+
 				return false;
 			}
 		}

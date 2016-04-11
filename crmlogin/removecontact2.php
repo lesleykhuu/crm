@@ -7,6 +7,7 @@ $user = $_SESSION['user'];
 if(isset($_GET['checkbox'])){
 	$checkbox = $_GET['checkbox'];
 	$length = count($checkbox);
+	// print_r($checkbox);
 	for($i=0; $i<$length; $i++){
 		$sql = "DELETE FROM `contactlist` WHERE `contactId`='$checkbox[$i]' AND `user`='$user'";
 		$conn->query($sql);

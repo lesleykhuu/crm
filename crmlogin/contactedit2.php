@@ -7,7 +7,6 @@ include 'connection.php';
 
 session_start();
 $user = $_SESSION['user'];
-
 if(isset($_GET['radio'])){
 	$radio = $_GET['radio'];
 	//uncomment to check index
@@ -17,13 +16,26 @@ if(isset($_GET['radio'])){
 	$sql = "SELECT * FROM `contactlist` WHERE `contactId`='$radio[0]' AND `user`='$user'";
 	$result = $conn->query($sql);
 	$info = $result->fetch_assoc();
-	$email = "Editing user with email, ".$info['email']." id = ".$info['contactId'];
+	$email = "Editing user, ".$user;
+	// echo $info['contactId'];
 
 }
 else{
 	header("Location: contactedit.php");
 
 }
+
+require 'Contact.php';
+$obj = new Contact();
+$fields = $obj->getColFields($user);
+
+$contactlist = "";
+$fieldquery ="";
+for($i = 0; $i < count($fields[1]); $i++){
+	$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
+			<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='form-control'><br><br>";
+}
+
 ?>
 
 
@@ -47,29 +59,31 @@ else{
 		<div>
 			<p class="title"> <strong><?php echo $email ?> </strong></p><br>
 		</div>
-		<div class="form-group">
+		<div class="box">
 			<form action="actualContactEdit.php" method="post">
-				<label class="inputlabel"> Edit First Name</label>
-				<input type="text" placeholder="First Name" name='firstname' class="form-control input"><br><br>
+				<!-- <label class="inputlabel"> Edit First Name</label>
+				<input type="text" placeholder="First Name" name='firstname' value=<?php echo $info['firstname'] ?> class="form-control"><br><br>
 				
 				<label class="inputlabel"> Edit Last Name</label>
-				<input type="text" placeholder="Last Name" name='lastname' class="form-control input"><br><br>
+				<input type="text" placeholder="Last Name" name='lastname' value=<?php echo $info['lastname'] ?> class="form-control"><br><br>
 				
 				<label class="inputlabel"> Edit Email</label>
-				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>			
-				
+				<input type="text" placeholder="Email" name='email' value=<?php echo $info['email'] ?> class="form-control"><br><br>			
+				 -->
+				 <?php echo $contactlist; ?>
 
 				<input type="hidden" name='actualEmail' value = <?php echo $radio[0]; ?> ><br><br>			
 				<input type="hidden" name='contactId' value = <?php echo $info['contactId']; ?> ><br><br>			
+				<input type="hidden" name='user' value = <?php echo $user; ?> ><br><br>			
 
 			
-				<input type="submit" value="Edit Contact" class="btn btn-success">
+				<input type="submit" value="Edit Contact" class="btn btn-success button">
 			</form>
 
 
 			<br>
-			<form action="login.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+			<form action="welcome.php">
+				<button type="submit" class="btn btn-success button">Home</button><br>
 			</form>
 		</div>
 		</center>

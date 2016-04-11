@@ -4,6 +4,23 @@
 	if(!isset($user)){
 		header("Location: index.html");
 	}
+
+
+	require 'Contact.php';
+	include 'connection.php';
+	$obj = new Contact();
+	$fields = $obj->getColFields($user);
+	$contactlist = "";
+	$fieldquery ="";
+	for($i = 0; $i < count($fields[1]); $i++){
+		$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
+				<input type='text' name='fields[]' class='form-control'><br><br>";
+	
+
+	}
+	
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -28,24 +45,18 @@
 			<p class="title"> <strong>Create Contact</strong></p><br>
 		</div>
 		
-		<div class="form-group">
+		<div class="box">
 			<form action="contactcreate.php" method="post">
-				<label class="inputlabel"> First Name</label>
-				<input type="text" placeholder="First Name" name='firstname' class="form-control input"><br><br>
 				
-				<label class="inputlabel"> Last Name</label>
-				<input type="text" placeholder="Last Name" name='lastname' class="form-control input"><br><br>
-				
-				<label class="inputlabel"> Email</label>
-				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>
+				<?php echo $contactlist ?>
 
-				<input type="submit" value="Create Contact" class="btn btn-success">
+				<input type="submit" value="Create Contact" class="btn btn-success btn-block">
 			</form>
 
 
 			<br>
-			<form action="login.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+			<form action="welcome.php">
+				<button type="submit" class="btn btn-success btn-block">Home</button><br>
 			</form>
 		</div>
 		</center>

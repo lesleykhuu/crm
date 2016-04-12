@@ -35,11 +35,52 @@
 		$check =1;
 			$empty = "Contact list is empty";
 	}
+	
+/////////////////
 
+$sqll = "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'contactlist'";
 
+  	$resultt = $conn->query($sqll);
+	$i = 0;
+	$colNames = [];
+    while($row = $resultt->fetch_assoc()) {
+    	$colNames[$i] = $row['COLUMN_NAME'];
 
+    	$i++;
+	}
+	$colList = "";
+
+	$sql = "SELECT * FROM `fields`";
+	$existingFields = [];
+	$existingFields[0] = 'contactId';
+	$existingFields[1] = 'user';
+	$i = 2;
+	$results = $conn->query($sql);
+	while($info = $results->fetch_assoc()){
+		$existingFields[$i] = $info['fieldid'];
+		$i++;
+	}
+	$delete = [];
+	$k = 0;
+	for($i = 0; $i < count($colNames); $i++){
+
+		if(in_array($colNames[$i],$existingFields)){
+		}
+		else{
+			$delete[$k] = $colNames[$i];
+			$k++;
+		}
+	}
+
+	for($i = 0; $i < count($delete); $i++){
+		$sql = "ALTER TABLE `contactlist` drop column `$delete[$i]`";
+			$conn->query($sql);
+			echo $conn->error;
+	}
+	
+
+echo $colList;
 ?>
-
 <!DOCTYPE HTML>
 <html>
 	<head>	

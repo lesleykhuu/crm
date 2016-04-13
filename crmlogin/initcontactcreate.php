@@ -8,15 +8,14 @@
 
 	require 'Contact.php';
 	include 'connection.php';
-	$obj = new Contact();
+	require 'Table.php';
+
+	$obj = new Table();
 	$fields = $obj->getColFields($user);
 	$contactlist = "";
-	$fieldquery ="";
 	for($i = 0; $i < count($fields[1]); $i++){
 		$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
 				<input type='text' name='fields[]' class='form-control'><br><br>";
-	
-
 	}
 	
 

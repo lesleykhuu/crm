@@ -10,20 +10,14 @@ if(!isset($user)){
 $field = $_POST['field'];
 if($field != ""){
 	$sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE `COLUMN_NAME` = '$field' AND `TABLE_NAME` = 'contactlist'";
-
 }
 else{
 	header("Location: addField.php");
 }
-// echo $field;
-// $sql = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE `COLUMN_NAME` = '$field' AND `TABLE_NAME` = '$user') BEGIN ALTER TABLE '$user' ADD '$field' END";
-// $sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE `COLUMN_NAME` = '$field' AND `TABLE_NAME` = 'contactlist'";
-//^
 
 if($result = $conn->query($sql)){
-	echo $result->num_rows;
+	// echo $result->num_rows;
 	if($result->num_rows){
-		// echo "already exists";
 		header("Location: addField.php");
 
 	}
@@ -52,8 +46,6 @@ if($result = $conn->query($sql)){
 else{
 	// echo "did not find ".$field.$user;
 	echo $conn->error;
-	// header("Location: addField.php");
 
-	// echo $conn->error;
+
 }
-

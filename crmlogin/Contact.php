@@ -37,30 +37,7 @@ class Contact{
 	@param $value is the new value you want to store. Second argument
 	*/
 	public function setValue($set, $value){
-		// echo $set;
-		$this->userFields[$set] = mysql_real_escape_string($value);
-		// print_r($this->userFields);
-		// echo $this->userFields[$set];
-		// if($set == 'firstname'){
-		// 	$this->userInfo['firstname'] = mysql_real_escape_string($value);
-		// }
-		// else if($set == 'lastname'){
-		// 	$this->userInfo['lastname'] = mysql_real_escape_string($value);
-		// }
-		// else if($set == 'email'){
-		// 	$this->userInfo['email'] = mysql_real_escape_string($value);
-		// }
-		// else if($set == 'user'){
-		// 	$this->userInfo['user'] = mysql_real_escape_string($value);
-		// }
-		// else if($set == 'contactId'){
-		// 	$this->userInfo['contactId'] = mysql_real_escape_string($value);
-		// }
-		// else{
-		// 	echo "setValue error";
-		// }
-
-		
+		$this->userFields[$set] = mysql_real_escape_string($value);		
 	}
 
 	/**
@@ -86,32 +63,6 @@ class Contact{
 			return "Invalid parameter. getValue error";
 		}
 	}
-
-	public function setColumns($fieldName){
-		$this->userFields[$fieldName] = NULL;
-		// echo "USERFIELDS = ";
-		// print_r($this->userFields);
-	}
-
-	public function getColFields($user){
-		require 'connection.php';
-		$sqll = "SELECT `field` FROM `fieldrelation` WHERE `user` = '$user'";
-	  	$resultt = $conn->query($sqll);
-		$i = 0;
-		$colNames = [];
-		$fields = [];
-	    while($row = $resultt->fetch_assoc()) {
-	    	$fieldid = $row['field'];
-	    	$sql = "SELECT `fieldname` FROM `fields` WHERE `fieldid` = '$fieldid'";
-	    	$result = $conn->query($sql);
-	    	$fieldname = $result->fetch_assoc();
-	    	$fields[$i] = $fieldid;
-	    	$colNames[$i] = $fieldname['fieldname'];
-	    	$i++;
-		}
-		return [$fields, $colNames];
-	}
-
 
 	/**
 	@brief Saves the values, that you set in setValue, into the database

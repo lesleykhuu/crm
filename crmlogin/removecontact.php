@@ -2,54 +2,13 @@
 	session_start();
 	$user = $_SESSION['user'];
 	if(!isset($user)){
-		header("Location: index.html");
-	}
-	require 'Contact.php';
-	include 'connection.php';
-
-
-	$obj = new Contact();
-	$fields = $obj->getColFields($user);
-
-	$sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
-	$result = $conn->query($sql);
-	$contactlist = "<thead><tr id='labels'><th></th>";
-	$fieldquery ="";
-	for($i = 0; $i < count($fields[1]); $i++){
-		$info = $result->fetch_assoc();
-		$fieldquery .= $fields[0][$i].",";
-
-		$contactlist .= "<th>".$fields[1][$i]."</th>";
-
-
+		header("Location: index.php");
 	}
 
-	$queryStr = substr($fieldquery,0, -1);
-	$contactlist .= "</tr></thead>";
-	
-
-	$contactlist .=  '<tr class="contactlisting">';
-	// $sql = "SELECT * FROM `contactlist` WHERE user = $user";
-	if($result = $conn->query($sql)){
-		$i = 0;
-		while($info = $result->fetch_assoc()){
-			$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";
-			for($j = 0; $j < count($fields[0]); $j++){
-				$contactlist .= "<td>".$info[$fields[0][$j]]."</td>";
-			}
-			$i++;
-			$contactlist .= "</tr>";
-		}
-	}
-	$check = 0;
-	$empty = "";
-	if($result->num_rows == 0){
-		$check =1;
-			$empty = "Contact list is empty";
-			$contactlist = "";
-		}
-
-	
+	require 'Table.php';
+	$obj = new Table();
+	$contactlist = $obj->printTable('remove',$user);
+	$check = $contactlist[1];
 
 		
 ?>
@@ -85,14 +44,18 @@
 				<form action="removecontact2.php" method="get">
 			
 			<?php
-				echo $contactlist;
+			if($check == 0){
+				echo $contactlist[0];
+			}
 			?>
 	
 			</table>
 			<div id="emptycontact">
 
 			<?php
-				echo $empty;
+			if($check == 1){
+				echo "Contact list is empty";
+			}
 			?>
 			
 			</div>

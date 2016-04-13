@@ -1,67 +1,13 @@
 <?php 
-	include 'connection.php';
-	include 'Contact.php';
 	session_start();
 	$user = $_SESSION['user'];
 	if(!isset($user)){
 		header("Location: index.html");
 	}
-	
 
-	// $sqll = "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$user'";
-
- //  	$resultt = $conn->query($sqll);
-	// $i = 0;
-	// $colNames = [];
- //    while($row = $resultt->fetch_assoc()) {
- //    	$colNames[$i] = $row['COLUMN_NAME'];
-	// 	// echo "<p>".$row['COLUMN_NAME']."</p>";
- //    // echo "<p>".$row[$i]."</p>";
- //    	$i++;
-	// }
-	// $colList = "";
-	// for($i = 0; $i < count($colNames); $i++){
-	// 	$colList .= "<tr><td style='background-color:grey'><input name='checkbox[]' type='checkbox' value = ".$colNames[$i]."></td>";
-	// 	$colList .= "<td style='background-color: grey ;color:black;font-size: 20px'>".$colNames[$i]."</td></tr>";
-	// 	// echo $colNames[$i];
-	// }
-
-	// $sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
-	// $result = $conn->query($sql);
-	// $contactlist = "";
-	// while($info = $result->fetch_assoc()){
-	// 	$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";					
-	// 	$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
-
-	// }
-
-
-	$sqll = "SELECT `field` FROM `fieldrelation` WHERE `user` = '$user'";
-  	$resultt = $conn->query($sqll);
-	$i = 0;
-	$colNames = [];
-	$fields = [];
-    while($row = $resultt->fetch_assoc()) {
-    	$fieldid = $row['field'];
-    	$sql = "SELECT `fieldname` FROM `fields` WHERE `fieldid` = '$fieldid'";
-    	$result = $conn->query($sql);
-    	$fieldname = $result->fetch_assoc();
-    	$fields[$i] = $fieldid;
-    	$colNames[$i] = $fieldname['fieldname'];
-    	// $colNames[$i] = $row['COLUMN_NAME'];
-		// echo "<p>".$row['COLUMN_NAME']."</p>";
-    // echo "<p>".$row[$i]."</p>";
-    	$i++;
-	}
-	$colList = "";
-	for($i = 0; $i < count($colNames); $i++){
-		$colList .= "<tr><td style='background-color:grey'><input name='checkbox[]' type='checkbox' value = ".$fields[$i]."></td>";
- 
-		// $colList .= "<tr><td style='background-color:grey'><input name='checkbox[]' type='checkbox' value = ".$colNames[$i]."></td>";
-		$colList .= "<td style='background-color: grey ;color:black;font-size: 20px'>".$colNames[$i]."</td></tr>";
-		// echo $colNames[$i];
-	}
-		
+	require 'Table.php';
+	$obj = new Table();
+	$colList = $obj->addRemoveField('remove',$user);
 
 ?>
 

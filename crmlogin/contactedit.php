@@ -5,49 +5,10 @@
 		header("Location: index.php");
 	}
 
-	require 'Contact.php';
-	include 'connection.php';
-
-	$obj = new Contact();
-	$fields = $obj->getColFields($user);
-
-	$sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
-	$result = $conn->query($sql);
-	$contactlist = "<thead><tr id='labels'><th></th>";
-	$fieldquery ="";
-	for($i = 0; $i < count($fields[1]); $i++){
-		$info = $result->fetch_assoc();
-		$fieldquery .= $fields[0][$i].",";
-
-		$contactlist .= "<th>".$fields[1][$i]."</th>";
-
-
-	}
-
-	$queryStr = substr($fieldquery,0, -1);
-	$contactlist .= "</tr></thead>";
-	
-
-	$contactlist .=  '<tr class="contactlisting">';
-	// $sql = "SELECT * FROM `contactlist` WHERE user = $user";
-	if($result = $conn->query($sql)){
-		while($info = $result->fetch_assoc()){
-			$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";
-			for($j = 0; $j < count($fields[0]); $j++){
-				$contactlist .= "<td>".$info[$fields[0][$j]]."</td>";
-			}
-			$contactlist .= "</tr>";
-		}
-	}
-	$check = 0;
-	$empty = "";
-	if($result->num_rows == 0){
-		$check =1;
-			$empty = "Contact list is empty";
-			$contactlist = "";
-		}
-
-	
+	require 'Table.php';
+	$obj = new Table();
+	$contactlist = $obj->printTable('edit',$user);
+	$check = $contactlist[1];
 
 
 ?>
@@ -83,7 +44,9 @@
 				<form action="contactedit2.php" method="get">
 			
 			<?php
-				echo $contactlist;
+			if($check == 0){
+				echo $contactlist[0];
+			}
 				
 			?>
 	
@@ -91,8 +54,9 @@
 			<div id="emptycontact">
 
 			<?php
-				echo $empty;
-			?>
+			if($check == 1){
+				echo "Contact list is empty";
+			}			?>
 			
 			</div>
 				<input type="submit" name="edit" value="Edit" class="btn btn-success">

@@ -44,19 +44,20 @@ class Contact{
 	@brief Gets the column from the database and returns it.
 	*/
 	public function getValue($value){
-		if(mysql_escape_string($value) == 'firstname'){
+		// if(mysql_escape_string($value) == 'firstname'){
+		if($value == 'firstname'){
 			return $this->userInfo['firstname'];
 		}
-		else if(mysql_escape_string($value) == 'lastname'){
+		else if($value == 'lastname'){
 			return $this->userInfo['lastname'];
 		}
-		else if(mysql_escape_string($value) == 'email'){
+		else if($value == 'email'){
 			return $this->userInfo['email'];
 		}
-		else if(mysql_escape_string($value) == 'contactId'){
+		else if($value == 'contactId'){
 			return $this->userInfo['contactId'];
 		}
-		else if(mysql_escape_string($value) == 'user'){
+		else if($value == 'user'){
 			return $this->userInfo['user'];
 		}
 		else{
@@ -69,7 +70,6 @@ class Contact{
 	*/
 	public function Save(){
 		require 'connection.php';
-		// print_r($this->userFields);
 		$queryStrUpdate = "";
 		$queryStrInsert1 = "";
 		$queryStrInsert2 = "";
@@ -95,20 +95,7 @@ class Contact{
 		$queryStrUpdate = substr($queryStrUpdate, 0, -1);
 		$queryStrInsert1 = substr($queryStrInsert1, 1);
 		$queryStrInsert2 = substr($queryStrInsert2, 1);
-		// $queryStrInsert1 .= 
-		// $queryStrInsert2 .= 
-		// $firstname = $this->userInfo['firstname'];
-		// $lastname = $this->userInfo['lastname'];
-		// $email = $this->userInfo['email'];
-		
-		// echo $user;
-		// echo $contactId;
-		// echo "<br>";
-		// echo "<br>".$firstname.$lastname.$contactId.$user.$email;
 
-		// echo $contactId;
-		// echo "  ".$user."  ";
-		// echo $user." ".$contactId;
 		if($contactId != NULL){
 			// $sql = "UPDATE `contactlist` SET `1`= '$firstname', `2`= '$lastname', `3`= '$email' WHERE `contactId` = '$contactId'";
 			$sql = "UPDATE `contactlist` SET ".$queryStrUpdate." WHERE `contactId` = '$contactId'";

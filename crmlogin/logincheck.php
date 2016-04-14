@@ -8,15 +8,7 @@ include 'connection.php';
 	$sql->bind_param('s', $user);
 	$sql->execute();
 	$result = $sql->get_result();
-
-	//$result = $conn->query($sql);
-	//$login = $result->mysqli_fetch_assoc();
-
 	$login = $result->fetch_assoc();
-
-	//printf("%s (%s)\n",$login['username'],$login['password']);
-	//print_r($login['username']);
-	//echo "yoyo".$login['password'];
 
 	if($user == $login['username'] && $enpass == $login['password']){
 		$sql = "SELECT `user` FROM `users` WHERE `username` = '$user'";

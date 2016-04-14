@@ -12,7 +12,7 @@ if(isset($_GET['checkbox'])){
 		$sql = "DELETE FROM `contactlist` WHERE `contactId`='$checkbox[$i]' AND `user`='$user'";
 		$conn->query($sql);
 		//if($conn->query($sql) === TRUE)
-			//echo "Contact Added!<br><br>";
+			//echo "Contact Removed!<br><br>";
 		//else
 			//echo $conn->error;
 	}	

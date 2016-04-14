@@ -41,7 +41,8 @@
 
 		<div class="row">
 		<div class="col-md-5" align="right">
-			<form action="initcontactcreate.php">
+			<form action="contactcreate.php" method = "post">
+				<input type="hidden" name="initCreate" value = "0" >			
 				<input type="submit" value="Create Contact" class="btn">
 			</form>
 		</div>
@@ -57,7 +58,8 @@
 			</form>
 		
 		</div>
-		<form action="addField.php">
+		<!-- <form action="addField.php"> -->
+		<form action="editTable.php">
 				<input type="submit" value="Edit Table" class="btn">
 			</form>
 		</div>

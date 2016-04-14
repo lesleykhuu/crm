@@ -139,7 +139,7 @@ tr, td{
 .buttons{
 	color: white;
 	/*background-color: #26a69a;*/
-	background-color:#21b6a8;
+	background-color: #21b6a8;
 	border-radius: 5px 5px 0px 0px;
 	border-color: transparent;
 	padding: 5px;
@@ -159,4 +159,44 @@ tr, td{
 
 .clear{
 	clear:both;
+}
+
+.addBtn{
+	display: block;
+	background-color: #177f75;
+	border-radius: 5px 5px 0px 0px;
+	border-color: transparent;
+}
+
+.removeBtn{
+	background-color: #177f75;
+	border-radius: 5px 5px 0px 0px;
+	border-color: transparent;
+}
+/*
+#addTable{
+	display: block;
+}
+
+#removeTable{
+	display: block;
+}	*/
+/*-webkit-touch-callout: none; */
+/* iOS Safari */
+  /*-webkit-user-select: none; */
+    /* Chrome/Safari/Opera */
+  /*-khtml-user-select: none;  */
+     /*Konqueror */
+  /*-moz-user-select: none;    */
+    /* Firefox */
+  /*-ms-user-select: none;     */
+    /* IE/Edge */
+  /*user-select: none;         */
+    /* non-prefixed version, currently
+
+
+}
+
+.removeBtn{
+	display: block;
 }

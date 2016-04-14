@@ -9,28 +9,32 @@
 		header("Location: index.html");
 	}
 	$message = "";
-	$fieldVals = $_POST['fields'];
+	$init = $_POST['initCreate'];
 	$obj = new Table();
 	$fields = $obj->getColFields($user);
-	$check =1;
+	if($init == 1){
+		$fieldVals = $_POST['fields'];
+		$check =1;
 
-	for($i=0; $i < count($fieldVals); $i++){
-		if($fieldVals[$i] != ""){
-			$check = 0;
+		for($i=0; $i < count($fieldVals); $i++){
+			if($fieldVals[$i] != ""){
+				$check = 0;
+			}
 		}
-	}
 
-	if($check == 0){
-		$obj = Contact::GetById(NULL);
-		$obj->setValue('user',$user);
-		for($i = 0; $i < count($fields[0]); $i++){
-			$obj->setValue($fields[0][$i], $fieldVals[$i]);
+		if($check == 0){
+			$obj = Contact::GetById(NULL);
+			$obj->setValue('user',$user);
+			for($i = 0; $i < count($fields[0]); $i++){
+				$obj->setValue($fields[0][$i], $fieldVals[$i]);
+			}
+			$obj->Save();
+			$message = "Contact Added!<br><br>";
 		}
-		$obj->Save();
-		$message = "Contact Added!<br><br>";
-	}
-	else{
-		$message = "Form was empty!<br><br>";
+		else{
+			$message = "Form was empty!<br><br>";
+		}
+		
 	}
 
 	$contactlist = "";
@@ -68,8 +72,10 @@
 			<?php
 				echo $contactlist;
 				echo $message;
-			?>
 			
+			?>
+				<input type="hidden" name="initCreate" value = "1" >			
+
 				<input type="submit" value="Create Contact" class="btn btn-success btn-block">
 			</form>
 

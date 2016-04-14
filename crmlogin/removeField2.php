@@ -72,4 +72,4 @@ if(isset($_GET['checkbox'])){
 	}
 	
 }
-header("Location: removeField.php");
+header("Location: editTable.php");

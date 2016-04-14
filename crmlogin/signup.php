@@ -48,14 +48,7 @@
 			$userid = $result->fetch_assoc();
 			$userr = $userid['user'];
 
-			// $sql = "INSERT INTO `fields`(`fieldname`) VALUES (('firstname'),('lastname'),('email'))";
-			// $conn->query($sql);
 
-			// $sql = "SELECT `fieldid` FROM `fields` WHERE `fieldname` = 'firstname'";
-			// $result = $conn->query($sql);
-			// $row = $result->fetch_assoc();
-			// // echo $row['fieldid'];
-			// $field1 = $row['fieldid'];
 			$sql = "INSERT INTO `fieldrelation`(`user`,`field`) VALUES ($userr,1),($userr,2),($userr,3)";
 			$conn->query($sql);
 			echo $sql;
@@ -74,13 +67,8 @@
 			echo $conn->error; 
 	}
 
-
-
 	$login = $result->fetch_assoc();
 
-	//printf("%s (%s)\n",$login['username'],$login['password']);
-	//print_r($login['username']);
-	//echo "yoyo".$login['password'];
 ?>
 
 <!DOCTYPE HTML>
@@ -105,11 +93,6 @@
 	</div>
 	<br>
 
-		
-			<!-- <form action="signup.php" method="post" id="forms"><br><br>
-			Username: <input type="text" name="user" class="input"> <br><br>
-			Password: <input type="password" name="password" class="input"><br><br>
-			<input type = "submit" value="Create" class="btn btn-success">
 			</form> -->
 		<div class = "box">
 				<br>

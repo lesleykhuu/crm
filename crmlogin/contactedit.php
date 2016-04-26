@@ -16,12 +16,12 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
+			<button type="submit" class="button">Logout</button><br>
 		</form>
 		
 	</div>
@@ -37,8 +37,8 @@
 <br>
 <br>
 
-		<div>
-			<table style="width: 40%" class="table table-bordered">
+		<div style="width: 40%">
+			<table style="width:100%" class="table">
 
 
 				<form action="contactedit2.php" method="get">
@@ -59,12 +59,13 @@
 			}			?>
 			
 			</div>
-				<input type="submit" name="edit" value="Edit" class="btn btn-success">
+			<br>
+				<input type="submit" name="edit" value="Edit" class="button">
 				
 				</form>
 			<br><br>
 				<form action="welcome.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+				<button type="submit" class="button">Home</button><br>
 				</form>
 
 		</div>

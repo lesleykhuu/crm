@@ -2,6 +2,7 @@
 	include 'connection.php';
 	include 'Contact.php';
 	require 'Table.php';
+	include_once 'header.html';
 
 	session_start();
 	$user = $_SESSION['user'];
@@ -44,24 +45,18 @@
 	}
 
 ?>
-
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="styles.css">
 
-	<div class="logout">
-		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
-		</form>
-		
-	</div>
+		<script> </script>
+
 	</head>
 
 	<body>
 		<br>
 		<center>
+
 		<div>
 			<p class="title"> <strong>Create Contact</strong></p><br>
 		</div>
@@ -76,13 +71,13 @@
 			?>
 				<input type="hidden" name="initCreate" value = "1" >			
 
-				<input type="submit" value="Create Contact" class="btn btn-success btn-block">
+				<input type="submit" value="Create Contact" class="fleft">
 			</form>
 
 
 			<br>
 			<form action="welcome.php">
-				<button type="submit" class="btn btn-success btn-block">Home</button><br>
+				<button type="submit" class="fleft">Home</button><br>
 			</form>
 		</div>
 		</center>

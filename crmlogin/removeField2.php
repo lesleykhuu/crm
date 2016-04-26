@@ -1,6 +1,13 @@
 <?php
 include 'connection.php';
 
+$ah = new Database();
+
+/*
+$ah = new Database();
+
+$ah->db()->prepare($query);
+*/
 session_start();
 $user = $_SESSION['user'];
 
@@ -13,15 +20,29 @@ if(isset($_GET['checkbox'])){
 
 		$queryStr .= "`".$checkbox[$i]."` = NULL,";
 		$query .= "".$checkbox[$i].",";
-	}	
+	}
+		
+// $name = mysql_real_escape_string($name);
+// 	$query = "SELECT `id`,`name` FROM `contactlist` WHERE `id` = ? AND `name` = ?";
+
+// 	$stmt = $conn->prepare($query);
+// 	$stmt->execute(array($id,$name));
+
+// 	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+// 	{
+// 		$row->id;
+// 		$row["name"];
+// 	}
+
+
 
 	$queryStr = substr($queryStr, 0, -1);
 	$query = substr($query, 0, -1);
 
-	$sql = "DELETE FROM `fieldrelation` WHERE user = $user AND `field` IN (".$query.")";
+	$sql = "DELETE FROM `fieldrelation` WHERE `user` = $user AND `field` IN (".$query.")";
 	$conn->query($sql);
 
-	$sql = "UPDATE `contactlist` SET $queryStr WHERE user = $user";
+	$sql = "UPDATE `contactlist` SET $queryStr WHERE `user` = $user";
 	$conn->query($sql);
 
 	$sql = "DELETE FROM `fields` where `fieldid` NOT IN (SELECT `field` FROM `fieldrelation`)";
@@ -72,4 +93,7 @@ if(isset($_GET['checkbox'])){
 	}
 	
 }
+$_SESSION['removeField'] = "yes";
 header("Location: editTable.php");
+// header("Location: editTable.php?remove=yes");
+?>

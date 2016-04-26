@@ -12,85 +12,61 @@
 	$remove = new Table();
 	$remove1 = $remove->addRemoveField('remove',$user);
 
+	if(isset($_SESSION['remove'])) {
+		$a = "<div id='addTable' class='form-group hidden1'>";
+		$b = "<button class='addField buttons' value='Add Field'>Add Field</button>";
+		$c = "<div id='removeTable' class='form-group'>";
+		$d = "<button class='removeField buttons pressedBtn' value='Remove Field'>Remove Field</button>";
+		unset($_SESSION['remove']);
+	}
+	else{
+		$a = "<div id='addTable' class='form-group'>";
+		$b = "<button class='addField buttons pressedBtn' value='Add Field'>Add Field</button>";
+		$c = "<div id='removeTable' class='form-group hidden1'>";
+		$d = "<button class='removeField buttons' value='Remove Field'>Remove Field</button>";
+	}
+
 ?>
  
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 	<script>
 	$(document).ready(function(){
-	//     $("#removeField").addClass("changeColor");
-		// $("#addField").click(function() {
-	 //        var input = this;
-	 //        input.disabled = true;
-	 //        setTimeout(function() {
-	 //           input.disabled = false;
-	 //        }, 3000);
 
-  //   	}); 
-    	// function clickAdd(){
-    	// 	document.getElementById("addField").disabled = true;
-    	// 	document.getElementById("removeField").disabled = false;
-    	// 	$("#addField").addClass("addBtn");
-
-    	// }
-    	// function clickRemove(){
-    	// 	document.getElementById("removeField").disabled = true;
-    	// 	document.getElementById("addField").disabled = false;
-    	// }
-
-    	$("button#addField").click(function(){
-    		document.getElementById("addField").disabled = true;
-    		document.getElementById("removeField").disabled = false;
-       		$("#addField").addClass("addBtn");
-       		$("#removeField").removeClass("removeBtn");
+    	$("button.addField").click(function(){
+    		document.getElementsByClassName("addField").disabled = true;
+    		document.getElementsByClassName("removeField").disabled = false;
+       		$(".addField").addClass("pressedBtn");
+       		$(".removeField").removeClass("pressedBtn");
        		$("#removeTable").addClass("hidden1");
        		$("#removeTable").removeClass("visible1");
        		$("#addTable").addClass("visible1");
 
-       		// $("#addTable").addClass("visible1");
-       		// $("#removeTable").addClass("hidden1");
-
     	});
-    	$("button#removeField").click(function(){
-    		document.getElementById("removeField").disabled = true;
-    		document.getElementById("addField").disabled = false;
-       		$("#removeField").addClass("removeBtn");
-       		$("#addField").removeClass("addBtn");
+    	$("button.removeField").click(function(){
+    		document.getElementsByClassName("removeField").disabled = true;
+    		document.getElementsByClassName("addField").disabled = false;
+       		$(".removeField").addClass("pressedBtn");
+       		$(".addField").removeClass("pressedBtn");
        		$("#addTable").addClass("hidden1");
        		$("#addTable").removeClass("visible1");
        		$("#removeTable").addClass("visible1");
 
-       		// $("#removeTable").addClass("visible1");
-       		// $("#")
-       		// $("#addTable").addClass("hidden1");
-
     	});
-  // 		$remove  
-		// $(function(){
-		//   $("input.myclass").attr("disabled", true);
-		// });
-		// $('input[type="button.removeField"]').click(function() {
-	 //        var input = this;
-	 //        input.disabled = true;
-	 //        // setTimeout(function() {
-	 //        //    input.disabled = false;
-	 //        // }, 3000);
-
-  //   	});    
 
 	});
 	</script>
 
-	<script src="editTable.js"></script>
+	<!-- <script src="editTable.js"></script> -->
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
+			<button type="submit" class="button">Logout</button><br>
 		</form>
 		
 	</div>
@@ -104,58 +80,68 @@
 		</div>
 
 
-		<div id="addTable" class="form-group">
+<!-- 		<div id="addTable" class="form-group">
+		<div id="addTable" class="form-group hidden1"> -->
+		<?php echo $a ?>
+
 
 			<!-- <nav id="nav01"> </nav> -->
 
-			<div class='menuBtn addBtn'>
-				<button id='addField' class='buttons' value='Add Field' onclick="clickAdd()">Add Field</button>
+			<div class='menuBtn pressedBtn'>
+<!-- 				<button class='addField buttons pressedBtn' value='Add Field'>Add Field</button>
+				<button class='addField buttons' value='Add Field'>Add Field</button> -->
+				<?php echo $b ?>
+
 			</div>
-			<div class='menuBtn removeBtn'>
-				<button id='removeField' class='buttons' value='Remove Field' onclick="clickRemove()">Remove Field</button>
+			<div class='menuBtn pressedBtn'>
+				<button class='removeField buttons' value='Remove Field'>Remove Field</button>
 			</div>
 
 
 
 <!--               -->
-
-			<div class="clear" style="float:left; border-style:solid; width:50%; background-color:#FFF4CB">
-			<table style="width: 40%" class="table table-bordered">
-			
-			<?php
-				echo $add1;
-				
-			?>
-	
-			</table>
-		</div>
-		<div style="float:left" class="form-group">
-			<form action="addField2.php" style="float: left; width:100%" method="post">
-				<label class="inputlabel"> Add Field</label>
-				<input type="text" placeholder="ex. Username" name='field' class="form-control">			
-				<input type="submit" value="Add Field" class="btn btn-success btn-block">
-			</form>
-		</div>
-
-		<div class="clear"></div>
-		<br>
-
-				<form action="welcome.php">
-					<button type="submit" name="home" class="btn btn-success">Home
+		<div style = "background-color:#FFF4CB">
+			<div class="" style="float:left; border-style:solid; width:50%; background-color:#FFF4CB">
+				<table style="width: 40%" class="table table-bordered">
+				<?php
+					echo $add1;
+					
+				?>
+		
+				</table>
+			</div>
+			<div style="float: right; width:49%" class="">
+				<form action="addField2.php" style="width:100%;" method="post">
+					<label class="inputlabel"> Add Field</label>
+					<input type="text" placeholder="ex. Username" name='field' class="fleft">			
+					<input type="submit" value="Add Field" class="button">
 				</form>
+			</div>
 
+			<div class="clear"></div>
+			<br>
+
+					<form action="welcome.php">
+						<button type="submit" name="home" class="button">Home
+					</form>
+
+			</div>
 		</div>
+<!-- 		<div id="removeTable" class="form-group hidden1">
+		<div id="removeTable" class="form-group"> -->
+		<?php echo $c ?>
 
-
-		<div id="removeTable" class="form-group hidden1">
 
 			<!-- <nav id="nav01"> </nav> -->
 
-			<div class='menuBtn addBtn'>
-				<button id='addField' class='buttons' value='Add Field' onclick="clickAdd()">Add Field</button>
+			<div class='menuBtn pressedBtn'>
+				<button class='addField buttons' value='Add Field'>Add Field</button>
 			</div>
-			<div class='menuBtn removeBtn'>
-				<button id='removeField' class='buttons' value='Remove Field' onclick="clickRemove()">Remove Field</button>
+			<div class='menuBtn pressedBtn'>
+			<!-- 	<button class='removeField buttons' value='Remove Field'>Remove Field</button>
+				<button class='removeField buttons pressedBtn' value='Remove Field'>Remove Field</button> -->
+				<?php echo $d ?>
+
 			</div>
 
 
@@ -169,12 +155,17 @@
 			?>
 	
 			</table>
-		</div><div class="clear"></div>
-		<br>
-				<input type="submit" name="delete" value="Delete" class="btn btn-success">
-				
+		</div>
+		<br><br><br><br><br>
+
+			<div id="deleteFields" class = >
+				<input type="submit" name="delete" value="Delete" class="btn btn-success btn-block">
+			</div>	
+
 			</form>
 			<br><br>
+			<div class = "clear"></div>
+			<br>
 			<form action="welcome.php">
 				<button type="submit" name="home" class="btn btn-success">Home
 			</form>

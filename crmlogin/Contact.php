@@ -20,6 +20,13 @@ class Contact{
 			$result = $conn->query($sql);
 			$info = $result->fetch_assoc();
 
+/*			foreach($info as $key=>$value)
+			{
+				$contact->setValue($key,$value);
+			}
+
+			$contact->setData($info);
+*/
 			$contact->setValue('firstname', $info['firstname']);
 			$contact->setValue('lastname', $info['lastname']);
 			$contact->setValue('email', $info['email']);
@@ -45,6 +52,15 @@ class Contact{
 	*/
 	public function getValue($value){
 		// if(mysql_escape_string($value) == 'firstname'){
+
+		if (array_key_exists($value,$this->userInfo))
+		{
+			return $this->userInfo[$value];
+		}
+
+
+		return "Invalid parameter. getValue error";
+
 		if($value == 'firstname'){
 			return $this->userInfo['firstname'];
 		}

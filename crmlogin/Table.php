@@ -8,6 +8,7 @@ class Table{
 
 	public function getColFields($user){
 		require 'connection.php';
+
 		$sqll = "SELECT `field` FROM `fieldrelation` WHERE `user` = '$user'";
 	  	$resultt = $conn->query($sqll);
 		$i = 0;
@@ -27,6 +28,7 @@ class Table{
 
 	public function printTable($tableType,$user){
 		require 'connection.php';
+
 		$obj = new Table();
 		$fields = $obj->getColFields($user);
 		if($tableType == 'welcome'){
@@ -48,13 +50,13 @@ class Table{
 		if($result = $conn->query($sql)){
 			while($info = $result->fetch_assoc()){
 				if($tableType == 'welcome'){
-					$contactlist .= "<tr>";
+					$contactlist .= "<tr class='js-row'>";
 				}
 				else if($tableType == 'edit'){
-					$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";
+					$contactlist .= "<tr class='js-row'><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";
 				}
 				else if($tableType == 'remove'){
-					$contactlist .= "<tr><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";
+					$contactlist .= "<tr class='js-row'><td><input name='checkbox[]' type='checkbox' value = ".$info['contactId']."></td>";
 				}
 
 				for($j = 0; $j < count($fields[0]); $j++){
@@ -74,6 +76,7 @@ class Table{
 
 	public function addRemoveField($addRemove,$user){
 		require 'connection.php';
+
 		$sqll = "SELECT `field` FROM `fieldrelation` WHERE `user` = '$user'";
 	  	$resultt = $conn->query($sqll);
 		$i = 0;

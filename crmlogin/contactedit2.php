@@ -37,12 +37,12 @@ for($i = 0; $i < count($fields[1]); $i++){
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
+			<button type="submit" class="button">Logout</button><br>
 		</form>
 		
 	</div>
@@ -64,13 +64,13 @@ for($i = 0; $i < count($fields[1]); $i++){
 				<input type="hidden" name='user' value = <?php echo $user; ?> >			
 
 			
-				<input type="submit" value="Edit Contact" class="btn btn-success button">
+				<input type="submit" value="Edit Contact" class="button">
 			</form>
 
 
 			<br>
 			<form action="welcome.php">
-				<button type="submit" class="btn btn-success button">Home</button><br>
+				<button type="submit" class="button">Home</button><br>
 			</form>
 		</div>
 		</center>

@@ -1,7 +1,7 @@
 <?php
 include 'connection.php';
 
-$ah = new Database();
+// $ah = new Database();
 
 /*
 $ah = new Database();

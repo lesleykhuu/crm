@@ -60,19 +60,31 @@
 			
 			</div>
 			<br>
-				<input type="submit" name="edit" value="Edit" class="button">
+				<input type="submit" name="edit" value="Edit" class="button width50">
 				
 				</form>
 			<br><br>
 				<form action="welcome.php">
-				<button type="submit" class="button">Home</button><br>
+				<button type="submit" class="button width50">Home</button><br>
 				</form>
 
 		</div>
 		</center>
 	
 	</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+<script>
+
+
+$('tr').click(function(e) {
+	// console.log(this);
+	// console.log(e);
+    $(this).find('input:radio').prop('checked', true);
+})
+
+
+</script>
 
 
 </html>

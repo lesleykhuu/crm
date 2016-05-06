@@ -14,8 +14,8 @@ if(isset($_GET['radio'])){
 	$sql = "SELECT * FROM `contactlist` WHERE `contactId`='$radio[0]' AND `user`='$user'";
 	$result = $conn->query($sql);
 	$info = $result->fetch_assoc();
-	$email = "Editing user, ".$user;
-
+	// $email = "Editing user, ".$user;
+	$email = "Editing user";
 }
 else{
 	header("Location: contactedit.php");
@@ -28,7 +28,7 @@ $fields = $obj->getColFields($user);
 $contactlist = "";
 for($i = 0; $i < count($fields[1]); $i++){
 	$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
-			<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='form-control'><br><br>";
+			<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='fleft'><br><br>";
 }
 
 ?>
@@ -37,7 +37,6 @@ for($i = 0; $i < count($fields[1]); $i++){
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<div class="logout">
@@ -46,6 +45,7 @@ for($i = 0; $i < count($fields[1]); $i++){
 		</form>
 		
 	</div>
+	<div class="clear"></div>
 	</head>
 
 	<body>
@@ -55,7 +55,8 @@ for($i = 0; $i < count($fields[1]); $i++){
 			<p class="title"> <strong><?php echo $email ?> </strong></p><br>
 		</div>
 		<div class="box">
-			<form action="actualContactEdit.php" method="post">
+			<br>
+			<form action="actualContactEdit.php" method="post" class="homeforms">
 
 				 <?php echo $contactlist; ?>
 
@@ -69,9 +70,10 @@ for($i = 0; $i < count($fields[1]); $i++){
 
 
 			<br>
-			<form action="welcome.php">
-				<button type="submit" class="button">Home</button><br>
+			<form action="welcome.php" class="homeforms">
+				<button type="submit" class="button">Home</button>
 			</form>
+			<br>
 		</div>
 		</center>
 	

@@ -12,17 +12,17 @@
 	$remove = new Table();
 	$remove1 = $remove->addRemoveField('remove',$user);
 
-	if(isset($_SESSION['remove'])) {
-		$a = "<div id='addTable' class='form-group hidden1'>";
+	if(isset($_SESSION['removeField'])) {
+		$a = "<div id='addTable' class='width50 hidden1'>";
 		$b = "<button class='addField buttons' value='Add Field'>Add Field</button>";
-		$c = "<div id='removeTable' class='form-group'>";
+		$c = "<div id='removeTable' class='width50'>";
 		$d = "<button class='removeField buttons pressedBtn' value='Remove Field'>Remove Field</button>";
-		unset($_SESSION['remove']);
+		unset($_SESSION['removeField']);
 	}
 	else{
-		$a = "<div id='addTable' class='form-group'>";
+		$a = "<div id='addTable' class='width50'>";
 		$b = "<button class='addField buttons pressedBtn' value='Add Field'>Add Field</button>";
-		$c = "<div id='removeTable' class='form-group hidden1'>";
+		$c = "<div id='removeTable' class='width50 hidden1'>";
 		$d = "<button class='removeField buttons' value='Remove Field'>Remove Field</button>";
 	}
 
@@ -58,6 +58,12 @@
        		$("#removeTable").addClass("visible1");
 
     	});
+    	$('tr').click(function(event) {
+		  	console.log(event);
+		    if (event.target.type !== 'checkbox') {
+		      $(':checkbox', this).trigger('click');
+		    }
+  		});
 
 	});
 	</script>
@@ -70,6 +76,7 @@
 		</form>
 		
 	</div>
+	<div class="clear"></div>
 	</head>
 
 	<body>
@@ -87,6 +94,12 @@
 
 			<!-- <nav id="nav01"> </nav> -->
 
+
+
+
+
+<!--               -->
+		<div class="width50 minTable">
 			<div class='menuBtn pressedBtn'>
 <!-- 				<button class='addField buttons pressedBtn' value='Add Field'>Add Field</button>
 				<button class='addField buttons' value='Add Field'>Add Field</button> -->
@@ -96,13 +109,10 @@
 			<div class='menuBtn pressedBtn'>
 				<button class='removeField buttons' value='Remove Field'>Remove Field</button>
 			</div>
-
-
-
-<!--               -->
-		<div style = "background-color:#FFF4CB">
-			<div class="" style="float:left; border-style:solid; width:50%; background-color:#FFF4CB">
-				<table style="width: 40%" class="table table-bordered">
+			<div class="clear"></div>
+		<div class="edittable">
+			<div class="maxHeight" style="">
+				<table class="edittableDisplay">
 				<?php
 					echo $add1;
 					
@@ -110,20 +120,23 @@
 		
 				</table>
 			</div>
-			<div style="float: right; width:49%" class="">
+			<div style="width:90%" class="">
+				<br>
 				<form action="addField2.php" style="width:100%;" method="post">
 					<label class="inputlabel"> Add Field</label>
-					<input type="text" placeholder="ex. Username" name='field' class="fleft">			
+					<input type="text" placeholder="ex. Username" name='field' class="fleft blackBorder">			
 					<input type="submit" value="Add Field" class="button">
 				</form>
+				<br>
+				<form action="welcome.php">
+					<button type="submit" name="home" class="button">Home
+				</form>
 			</div>
-
-			<div class="clear"></div>
 			<br>
+		</div>
+			<!-- <div class="clear"></div> -->
+			
 
-					<form action="welcome.php">
-						<button type="submit" name="home" class="button">Home
-					</form>
 
 			</div>
 		</div>
@@ -134,6 +147,7 @@
 
 			<!-- <nav id="nav01"> </nav> -->
 
+		<div class="width50 minTable">
 			<div class='menuBtn pressedBtn'>
 				<button class='addField buttons' value='Add Field'>Add Field</button>
 			</div>
@@ -144,41 +158,37 @@
 
 			</div>
 
-
-			<div class="clear" style="float:left; border-style:solid; width:50%; background-color:#FFF4CB">
-			<table style="width: 40%" class="table table-bordered">
-			<form action="removeField2.php" method="get">
+			<div class="clear" />
+			<div class="edittable">
+				<div class="maxHeight">
+					<table class="edittableDisplay">
+						<form action="removeField2.php" method="get">
+					
+						<?php
+							echo $remove1;
+							
+						?>
 			
-			<?php
-				echo $remove1;
-				
-			?>
-	
-			</table>
+						</table>
+						<br>
+				</div>
+					<br><br><br><br>
+					<div style="width:90%" >
+							<input type="submit" name="delete" value="Remove Field" class="button">
+						</form>
+						<br><br>
+						<form action="welcome.php">
+							<button type="submit" name="home" class="button">Home</button>
+						</form>
+						<br>
+					</div>	
+
+			</div>
+			
 		</div>
-		<br><br><br><br><br>
-
-			<div id="deleteFields" class = >
-				<input type="submit" name="delete" value="Delete" class="btn btn-success btn-block">
-			</div>	
-
-			</form>
-			<br><br>
-			<div class = "clear"></div>
-			<br>
-			<form action="welcome.php">
-				<button type="submit" name="home" class="btn btn-success">Home
-			</form>
-		</div>
-
-
-
-
-
 		</center>
 	
 	</body>
-
 
 
 </html>

@@ -6,20 +6,22 @@
 	}
 
 	require 'Table.php';
+	require 'connection.php';
 	$obj = new Table();
 	$contactlist = $obj->printTable('welcome',$user);
 	$check = $contactlist[1];
+	$sql = "SELECT `username` FROM `users` where user=$user";
+	$result = $conn->query($sql);
+	$username = $result->fetch_assoc();
 
-	$welcome = "Welcome ".$user;
+	// $welcome = "Welcome ".$user;
+	$welcome = "Welcome ".$username['username'];
 
 ?>
 <!DOCTYPE HTML>
 <html>
 	<head>	
 
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"> -->
-
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 
@@ -106,7 +108,7 @@
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="reorder.js"></script>
-
+<!-- 
 
 <table class="bordered">
     <thead>
@@ -128,4 +130,4 @@
             <td><label>Value</label></td>                            
         </tr>
     </tbody>                    
-</table>
+</table> -->

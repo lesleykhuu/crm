@@ -41,7 +41,7 @@
 	$contactlist = "";
 	for($i = 0; $i < count($fields[1]); $i++){
 		$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
-				<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='form-control'><br><br>";
+				<input type='text' placeholder='' class='fleft'".$fields[1][$i]."' name='fields[]'><br><br>";
 	}
 
 ?>
@@ -61,7 +61,8 @@
 			<p class="title"> <strong>Create Contact</strong></p><br>
 		</div>
 		<div class="box">
-			<form action="contactcreate.php" method="post">
+			<br>
+			<form action="contactcreate.php" method="post" class="homeforms">
 							
 				
 			<?php
@@ -70,14 +71,12 @@
 			
 			?>
 				<input type="hidden" name="initCreate" value = "1" >			
-
-				<input type="submit" value="Create Contact" class="fleft">
+				<input type="submit" value="Create Contact" class="fleft button">
 			</form>
 
 
-			<br>
-			<form action="welcome.php">
-				<button type="submit" class="fleft">Home</button><br>
+			<form action="welcome.php" class="homeforms">
+				<button type="submit" class="fleft button">Home</button><br>
 			</form>
 		</div>
 		</center>

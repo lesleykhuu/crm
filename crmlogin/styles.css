@@ -22,7 +22,7 @@ body{
 	/*background-color: transparent;*/
 	background-color: #75798f ;
 	border-style: solid;
-	border-color: white;
+	border-color: black;
 	border-width:1px;
 	/*border-color: #75798f ;*/
 	width: 20%;
@@ -120,7 +120,8 @@ p, form, .signUpFont{
 	/*background-color: #26a69a;*/
 	/*background-color: #21b6a8;*/
 	background-color: #177f75;
-	border-color: transparent;
+	border-color: black;
+	border-width: 1px;
 	padding: 5px;
 	-webkit-transition: .3s;
 	transition: .3s;
@@ -135,7 +136,8 @@ p, form, .signUpFont{
 	font-size: 17px;
 	background-color: #177f75;
 	/*background-color: #26a69a;*/
-	border-color: transparent;
+	border-color: black;
+	border-width: 1px;
 	padding: 5px;
 	-webkit-transition: .3s;
 	transition: .3s;
@@ -164,7 +166,8 @@ p, form, .signUpFont{
 	display: block;
 	background-color: #105952;
 	border-radius: 5px 5px 0px 0px;
-	border-color: transparent;
+	border-color: black;
+	border-width: 1px;
 	cursor: default;
 }
 /*
@@ -291,6 +294,7 @@ td:last-child{
 	border-width: 1px;
 	border-spacing: 0px;
 	width: 90%;
+	border-color: black;
 }
 
 .edittableDisplay{
@@ -323,7 +327,7 @@ th:last-child{
 
 	border-style:solid;
 	border-width:1px;	
-	border-color: white;
+	border-color: black;
 	background-color: #75798f;
 }
 

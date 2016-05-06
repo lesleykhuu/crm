@@ -101,13 +101,16 @@
 			</div>
 		</div>
 		</center>
-	
+
+		<div class="objects"></div>
+
 	</body>
 
 
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="reorder.js"></script>
+<!-- <script src="reorder.js"></script> -->
+<script src="accessData.js"></script>
 <!-- 
 
 <table class="bordered">

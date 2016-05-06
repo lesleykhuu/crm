@@ -71,12 +71,12 @@
 			
 			?>
 				<input type="hidden" name="initCreate" value = "1" >			
-				<input type="submit" value="Create Contact" class="fleft button">
+				<input type="submit" value="Create Contact" class="button">
 			</form>
 
 
 			<form action="welcome.php" class="homeforms">
-				<button type="submit" class="fleft button">Home</button><br>
+				<button type="submit" class="button">Home</button><br>
 			</form>
 		</div>
 		</center>

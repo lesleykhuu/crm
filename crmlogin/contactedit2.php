@@ -4,41 +4,48 @@ Allows the user to input the fields they want to edit
 
 */
 include 'connection.php';
+require 'Contact.php';
+require 'Table.php';
 
 session_start();
 $user = $_SESSION['user'];
-
 if(isset($_GET['radio'])){
 	$radio = $_GET['radio'];
-	//uncomment to check index
-	// echo $radio[0];
-
-
 	$sql = "SELECT * FROM `contactlist` WHERE `contactId`='$radio[0]' AND `user`='$user'";
 	$result = $conn->query($sql);
 	$info = $result->fetch_assoc();
-	$email = "Editing user with email, ".$info['email']." id = ".$info['contactId'];
-
+	// $email = "Editing user, ".$user;
+	$email = "Editing user";
 }
 else{
 	header("Location: contactedit.php");
 
 }
+
+$obj = new Table();
+$fields = $obj->getColFields($user);
+
+$contactlist = "";
+for($i = 0; $i < count($fields[1]); $i++){
+	$contactlist .= "<label class='inputlabel'>".$fields[1][$i]."</label>
+			<input type='text' placeholder='".$fields[1][$i]."' name='fields[]' class='fleft'><br><br>";
+}
+
 ?>
 
 
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
+			<button type="submit" class="button">Logout</button><br>
 		</form>
 		
 	</div>
+	<div class="clear"></div>
 	</head>
 
 	<body>
@@ -47,30 +54,26 @@ else{
 		<div>
 			<p class="title"> <strong><?php echo $email ?> </strong></p><br>
 		</div>
-		<div class="form-group">
-			<form action="actualContactEdit.php" method="post">
-				<label class="inputlabel"> Edit First Name</label>
-				<input type="text" placeholder="First Name" name='firstname' class="form-control input"><br><br>
-				
-				<label class="inputlabel"> Edit Last Name</label>
-				<input type="text" placeholder="Last Name" name='lastname' class="form-control input"><br><br>
-				
-				<label class="inputlabel"> Edit Email</label>
-				<input type="text" placeholder="Email" name='email' class="form-control input"><br><br>			
-				
+		<div class="box">
+			<br>
+			<form action="actualContactEdit.php" method="post" class="homeforms">
 
-				<input type="hidden" name='actualEmail' value = <?php echo $radio[0]; ?> ><br><br>			
-				<input type="hidden" name='contactId' value = <?php echo $info['contactId']; ?> ><br><br>			
+				 <?php echo $contactlist; ?>
+
+				<input type="hidden" name='actualEmail' value = <?php echo $radio[0]; ?> >			
+				<input type="hidden" name='contactId' value = <?php echo $info['contactId']; ?> >			
+				<input type="hidden" name='user' value = <?php echo $user; ?> >			
 
 			
-				<input type="submit" value="Edit Contact" class="btn btn-success">
+				<input type="submit" value="Edit Contact" class="button">
 			</form>
 
 
 			<br>
-			<form action="login.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+			<form action="welcome.php" class="homeforms">
+				<button type="submit" class="button">Home</button>
 			</form>
+			<br>
 		</div>
 		</center>
 	

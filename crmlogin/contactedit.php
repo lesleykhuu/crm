@@ -2,29 +2,26 @@
 	session_start();
 	$user = $_SESSION['user'];
 	if(!isset($user)){
-		header("Location: index.html");
+		header("Location: index.php");
 	}
-	include 'connection.php';
-	$sql = "SELECT * FROM `contactlist` WHERE `user`='$user'";
-	$result = $conn->query($sql);
-	$contactlist = "";
-	while($info = $result->fetch_assoc()){
-		$contactlist .= "<tr><td><input name='radio[]' type='radio' value = ".$info['contactId']."></td>";					
-		$contactlist .= "<td>".$info['firstname']."</td><td>".$info['lastname']."</td><td>".$info['email']."</td></tr>";
 
-	}
-		
+	require 'Table.php';
+	$obj = new Table();
+	$contactlist = $obj->printTable('edit',$user);
+	$check = $contactlist[1];
+
+
 ?>
 
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<div class="logout">
 		<form action="logout.php">
-			<button type="submit" class="btn btn-success btn-xs">Logout</button><br>
+			<button type="submit" class="button">Logout</button><br>
 		</form>
 		
 	</div>
@@ -40,36 +37,55 @@
 <br>
 <br>
 
-		<div>
-			<table style="width: 40%" class="table table-bordered">
-				<tr>
-					<td></td>
-					<td> First Name </td>
-					<td> Last Name </td>
-					<td> Email </td>
-				</tr>
+		<div style="width: 40%">
+			<table style="width:100%" class="table">
+
 
 				<form action="contactedit2.php" method="get">
 			
 			<?php
-				echo $contactlist;
+			if($check == 0){
+				echo $contactlist[0];
+			}
 				
 			?>
 	
 			</table>
-				<input type="submit" name="edit" value="Edit" class="btn btn-success">
+			<div id="emptycontact">
+
+			<?php
+			if($check == 1){
+				echo "Contact list is empty";
+			}			?>
+			
+			</div>
+			<br>
+				<input type="submit" name="edit" value="Edit" class="button width50">
 				
 				</form>
 			<br><br>
-				<form action="login.php">
-				<button type="submit" class="btn btn-success">Home</button><br>
+				<form action="welcome.php">
+				<button type="submit" class="button width50">Home</button><br>
 				</form>
 
 		</div>
 		</center>
 	
 	</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+<script>
+
+
+$('tr').click(function(e) {
+	// console.log(this);
+	// console.log(e);
+    $(this).find('input:radio').prop('checked', true);
+})
+
+
+</script>
+<script src="accessData.js"></script>
 
 
 </html>

@@ -4,29 +4,36 @@ Takes in values from contactedit2.php and changes them in the database.
 
 */
 require 'Contact.php';
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$email = $_POST['email'];
+require 'Table.php';
 $contactId = $_POST['contactId'];
+$user = $_POST['user'];
+$fieldVals = $_POST['fields'];
+$message = "";
 
-$check = 0;
+$obj = new Table();
+$fields = $obj->getColFields($user);
 
-if(!empty($_POST['firstname']) || !empty($_POST['lastname']) || !empty($_POST['email'])){
-	// $obj = new Contact();
-	// $obj::GetByEmail($actualEmail);
-	$obj = Contact::GetById($contactId);
-	// echo $contactId;
-	if(!empty($_POST['firstname'])){
-		$obj->setValue('firstname',$firstname);
+$check =1;
+for($i=0; $i < count($fieldVals); $i++){
+	if("" != $fieldVals[$i]){
+		$check = 0;
+		break;
 	}
-	if(!empty($_POST['lastname'])){
-		$obj->setValue('lastname',$lastname);
-	}
-	if(!empty($_POST['email'])){
-		$obj->setValue('email',$email);
-	}
+}
 
+if($check == 0){
+	$obj = Contact::GetById(NULL);
+	$obj->setValue('user',$user);
+	$obj->setValue('contactId',$contactId);
+
+	for($i = 0; $i < count($fields[0]); $i++){
+		$obj->setValue($fields[0][$i], $fieldVals[$i]);
+	}
 	$obj->Save();
+}
+else{
+	$message = "Form was empty!<br><br>";
+	header("Location: contactedit.php"	);
 }
 
 	

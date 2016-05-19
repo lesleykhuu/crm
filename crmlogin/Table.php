@@ -34,17 +34,20 @@ class Table{
 		if($tableType == 'welcome'){
 			$header = "<thead><tr id='labels'>";
 		}
-		else if($tableType == 'edit'){
+		else if($tableType == 'edit' || $tableType == 'remove'){
 			$header = "<thead><tr id='labels'><th></th>";
 		}
-		else if($tableType == 'remove'){
-			$header = "<thead><tr id='labels'><th></th>";
-		}
-
 		$sql = "SELECT * FROM `contactlist` WHERE user = $user";
 		$contactlist = $header;
-		for($i = 0; $i < count($fields[1]); $i++){
-			$contactlist .= "<th>".$fields[1][$i]."</th>";
+		if($tableType == 'welcome'){
+			for($i = 0; $i < count($fields[1]); $i++){
+			$contactlist .= "<th><span>".$fields[1][$i]."</span><img id=".$fields[0][$i]." onClick='loadData(parseData,this.id)' src=1462945499_sort.png class='imgSize' ></th>";
+			}
+		}
+		else{
+			for($i = 0; $i < count($fields[1]); $i++){
+				$contactlist .= "<th>".$fields[1][$i]."</th>";
+			}
 		}
 		$contactlist .= "</tr></thead>";
 		if($result = $conn->query($sql)){
@@ -93,19 +96,20 @@ class Table{
 	    	$i++;
 		}
 		$colList = "";
+
 		if($addRemove == 'add'){
 			for($i = 0; $i < count($colNames); $i++){
-				$colList .= "<tr><td class='addTable'>".$colNames[$i]."</td></tr>";
+				$colList .= "<tr><td class='editTableFields addFieldRow'>".$colNames[$i]."</td></tr>";
 			}
 		}
 		else if($addRemove == 'remove'){
 			for($i = 0; $i < count($colNames); $i++){
 				// $colList .= "<tr><td style='background-color:grey'><input name='checkbox[]' type='checkbox' value = ".$fields[$i]."></td>";
-				$colList .= "<tr class='rowHover'><td class='addTable'><input name='checkbox[]' type='checkbox' value = ".$fields[$i]."></td>";
+				$colList .= "<tr class='rowHover removeFieldRow'><td class='editTableFields'><input name='checkbox[]' type='checkbox' value = ".$fields[$i]."></td>";
 		 
 				// $colList .= "<tr><td style='background-color:grey'><input name='checkbox[]' type='checkbox' value = ".$colNames[$i]."></td>";
 				// $colList .= "<td style='background-color: grey ;color:black;font-size: 20px; width: 100%'>".$colNames[$i]."</td></tr>";
-				$colList .= "<td class='addTable'>".$colNames[$i]."</td></tr>";
+				$colList .= "<td class='editTableFields removeFieldRow'>".$colNames[$i]."</td></tr>";
 				// echo $colNames[$i];
 			}
 		}

@@ -85,6 +85,7 @@ $('tr').click(function(e) {
 
 
 </script>
+<script src="accessData.js"></script>
 
 
 </html>

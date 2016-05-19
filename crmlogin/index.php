@@ -54,7 +54,7 @@
 		<div class="box"> 
 		<br>
 		<div class="signUpFont"> LOGIN </div>
-		<form action="logincheck.php" method="post" class = "homeforms">
+		<form action="logincheck.php" method="post" class = "homeforms login">
 			<label class="inputlabel"> USERNAME: </label><br>
 			<input type="text" placeholder="" name='user' class="fleft"><br>
 			
@@ -69,7 +69,7 @@
 		<!-- <p class = "visible1"> If you are a new user, click here to sign up here! </p> -->
 		<p class = "hidden1"> SIGN UP </p>
 		<div class="hidden1">
-			<form action="signup.php" method="post" class = "homeforms">
+			<form action="signup.php" method="post" class = "homeforms signup">
 				<label class="inputlabel"> USERNAME: </label>
 				<input type="text" placeholder="" name='user' class="fleft"><br><br>
 				

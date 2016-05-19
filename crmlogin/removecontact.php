@@ -83,6 +83,14 @@
   });
 
 
+	// $('tr').click(function(e) {
+
+	// 	// alert(e.toUpperCase);
+ //    	$('tr').find('input').prop('checked', true);
+	// });
+
+
 </script>
+<script src="accessData.js"></script>
 
 </html>

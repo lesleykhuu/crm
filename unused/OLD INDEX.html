@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<center><br><br><strong><p class="title">Home page</p></strong></center>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+	function myFunction() {
+	    document.getElementById("visible1").style.display = "block";
+	   // document.getElementById("hidden").style.display = "none";
+	}
+	$(document).ready(function(){
+		$( ".visible1" ).click(function() {
+	  		$( ".visible1" ).hide();
+	  		//$( ".hidden1").show();
+	  		$( ".hidden1" ).show("slow");
+
+	  		//alert("asdf0");
+		});
+	});
+	
+	</script>
+
+
+
+	</head>
+
+	<body>
+	<center>
+		<br><br>
+		<div class="box"> 
+			<br>
+		<p> Login here</p>
+		<form action="logincheck.php" method="post" class = "homeforms">
+			<label class="inputlabel"> Username: </label>
+			<input type="text" placeholder="Username" name='user' class="form-control"><br>
+			
+			<label class="inputlabel"> Password: </label>
+			<input type="text" placeholder="Password" name='password' class="form-control"><br>
+			
+			<div><input type = "submit" value="Login" class="btn btn-success btn-block"></div>
+		</form>
+
+		<br><br><br>
+
+
+		<p class = "visible1"> If you are a new user, click here to sign up here! </p>
+		<p class = "hidden1"> Sign up here </p>
+	<div class="hidden1">
+			<form action="signup.php" method="post" class = "homeforms">
+				<label class="inputlabel"> Username: </label>
+				<input type="text" placeholder="Username" name='user' class="form-control"><br>
+				
+				<label class="inputlabel"> Password: </label>
+				<input type="text" placeholder="Password" name='password' class="form-control"><br>
+				<input type = "submit" value="Sign up" class="btn btn-success btn-block">
+			</form>
+	</div>
+		<div>
+			<button class="btn btn-success button visible1">Create an account</button><br>
+		<div> 
+
+		<br><br>
+		</div>
+	</center>
+
+	</body>
+
+
+
+</html>

@@ -178,7 +178,7 @@ p, form, .signUpFont{
 }*/
 
 
-input[type='submit'],button{
+input[type='submit'],button,img{
 	cursor: pointer;
 }
 
@@ -261,7 +261,7 @@ tr, td{
 
 }
 
-.addTable{
+.editTableFields{
 	/*background-color: gray;*/
 	/*background-color: #e1e1e1;*/
 	/*background-color: #fafafa;*/
@@ -342,8 +342,18 @@ th:last-child{
 	overflow-y:auto;
 
 }
+
+.imgSize{
+	height: 12px;
+	max-width: 30px;
+	margin-left: 10px;
+}
+span{
+	margin-bottom: 5px;
+}
+
 /*
-#addTable{
+#editTableFields{
 	display: block;
 }
 

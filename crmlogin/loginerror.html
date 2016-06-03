@@ -11,15 +11,24 @@
 	<center>
 		<br><br>
 		<p>Username or password was incorrect. Please try again.</p>
-			<form action="logincheck.php" method="post">
-			Username: <input type="text" name="user" class="input"> <br><br>
-			Password: <input type="password" name="password" class="input"><br><br>
-			<input type = "submit" value="Login" class="btn btn-success">
-		</form>
-		<br>
-		<form action="index.html">
-			<button type="submit" class="btn btn-success">Home</button>
-		</form>
+			<br>
+		<div class="box">
+			<br>
+			<form action="logincheck.php" method="post" class = "homeforms">
+				<label class="inputlabel"> Username: </label>
+				<input type="text" placeholder="Username" name='user' class="form-control"><br>
+				
+				<label class="inputlabel"> Password: </label>
+				<input type="password" placeholder="Password" name='password' class="form-control"><br>
+				
+				<div><input type = "submit" value="Login" class="btn btn-success btn-block"></div>
+			</form>
+			<br>
+			<form action="index.php" class = "homeforms">
+				<button type="submit" class="btn btn-success button">Home</button><br>
+			</form>
+			<br><br>
+		</div>
 
 	</center>
 

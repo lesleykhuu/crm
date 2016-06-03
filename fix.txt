@@ -1,0 +1,85 @@
+2. fixed zoom after it gets too small
+3. homepage inputs outside margins
+	removeColumn delete button too big on editTable. why does that happen. the form on addColumn has some padding on it?
+--------4. make navigation bar for editTable nicer. change buttons when on page to make it look clicked
+	http://www.w3schools.com/website/web_spa_navigation.asp     look at css border-radius
+5. how to change the css of the tab
+--------6. how to not change pages. dont want to use bootstrap for nav tab
+
+removecontact messed up
+
+--------1. refresh with info on signup.php will log you in
+--------7. get rid of contactid and user table
+8. make row clickable to edit/remove
+--------9. removeField2 => drop does not work
+--------10. edit contact makes everything blank if theres no input
+--------make actualcontactedit not new page
+--------11. bug with @ symbol for signup. does not create table
+
+
+						there were 22 null rows added
+
+						default table
+						userid first last email
+						1 		lesley khuu lkhuu 
+						2		bob	  lee 	blee
+						edit table
+						add company -> alter table contactlist add $field varchar(100)
+						insert into `fields` (userid, fieldname) values($userid, fieldname)
+
+
+
+									$sql = "INSERT INTO `$user`(`user`, `firstname`, `lastname`, `email`) VALUES ('$user','$firstname','$lastname','$email')"; 
+
+
+
+
+						table
+						uesrid first last email company
+						1 		lesley khuu lkhuu NULL
+						2		bob		lee blee	NULL
+
+
+
+
+--------if you remove field from user 1 and they have info, then you readd it, data may still exist in that column if the column does not get deleted from contactlist.
+--------deleting same column causes problems.
+
+
+--------fixed bug. deleted all columns from all users when you delete a column from one user.
+
+created a new Table class in Table.php. used in welcome.php, contactedit, removecontact to print table and addfield and remove field to print fields
+still trying to clean up code.
+
+Removed initcontactcreate. only contactcreate is needed now 
+
+
+
+
+
+1. allow N/A for contactedit
+2. make row clickable to edit/remove
+3. add scrollbars once windows become too long
+4. can't order table labels
+5. make row clickable to edit/remove
+6. maybe Cleanup contactedit2 and contactcreate
+7. fixed zoom after it gets too small
+----------8. homepage inputs outside margins
+	removeColumn delete button too big on editTable. why does that happen. the form on addColumn has some padding on it?
+
+----------3. make removeField2 redirect to editTable but nav tab on remove field
+		fixed this but used sessions to check if its on remove or not. then echo the correct format to page. is this the right way to do it
+
+
+backedn
+fix so you can add "user" as a field. right now user exists already cause of the user column in contactlist
+
+
+
+ASK DAVID		data attributes in html. sort rows based on firstname data attribute
+	css loads slowly. only works if you add <script> </script> with a space inbetween. in contactcreate
+
+cleanup -> make more classes. more generic
+make header
+
+fix margins
